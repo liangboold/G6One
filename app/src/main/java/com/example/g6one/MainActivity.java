@@ -1,7 +1,9 @@
 package com.example.g6one;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -23,6 +25,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     ArrayList<NewsTypeBean> data = new ArrayList<>();
     private RecyclerView newsType;
+    private Button next;
+
     int count = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +60,19 @@ public class MainActivity extends AppCompatActivity {
                         });
                     }
                 });
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initView() {
         newsType = (RecyclerView) findViewById(R.id.news_type);
         newsType.setLayoutManager(new GridLayoutManager(this,3));
+        next = (Button) findViewById(R.id.next);
     }
 
     private class NewsTypeAdapter extends BaseQuickAdapter<NewsTypeBean, BaseViewHolder>{
