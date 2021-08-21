@@ -32,25 +32,26 @@ public class RetrofitFactory {
     private Retrofit retrofit;
     private volatile static RetrofitFactory retrofitFactory;
 
-    public static RetrofitFactory getRetrofitFactory() {
+    public static RetrofitFactory getRetrofitFactory(String url) {
         if(retrofitFactory==null){
             synchronized (RetrofitFactory.class){
                 if(retrofitFactory==null){
-                    retrofitFactory = new RetrofitFactory();
+                    retrofitFactory = new RetrofitFactory(url);
                 }
             }
         }
         return retrofitFactory;
     }
-    public RetrofitFactory(){
-        retrofit = createRetrofit();
+
+    public RetrofitFactory(String url){
+        retrofit = createRetrofit(url);
     }
 
     private String mToken = "";
 
-    private Retrofit createRetrofit() {
+    private Retrofit createRetrofit(String url) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://39.98.153.96:8080/")
+                .baseUrl(url)
                 .addConverterFactory(CustomGsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addCallAdapterFactory(LiveDataCallAdapterFactory.create())
