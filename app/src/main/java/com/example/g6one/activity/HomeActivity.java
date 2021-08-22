@@ -1,4 +1,4 @@
-package com.example.g6one;
+package com.example.g6one.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 
+import com.example.g6one.R;
 import com.example.g6one.adapter.FragmentAdapter;
 import com.example.g6one.entity.MyBtnEntity;
 import com.example.g6one.fragment.HomePageFragment;

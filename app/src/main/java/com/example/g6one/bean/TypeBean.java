@@ -1,4 +1,4 @@
-package com.example.g6one;
+package com.example.g6one.bean;
 
 import java.util.List;
 
