@@ -22,12 +22,10 @@ import com.lzy.okgo.model.Response;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class TypeActivity extends AppCompatActivity {
     ArrayList<NewsTypeBean> data = new ArrayList<>();
     private RecyclerView newsType;
     private Button next;
-
-    int count = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                Intent intent = new Intent(TypeActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });

@@ -21,7 +21,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 
 import java.util.ArrayList;
 
-public class MainActivity2 extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     private ViewPager vp;
     private CommonTabLayout tab;
