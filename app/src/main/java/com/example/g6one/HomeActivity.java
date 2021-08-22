@@ -40,10 +40,10 @@ public class HomeActivity extends AppCompatActivity {
         list.add(new MyFragment());
         FragmentAdapter fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), list);
         vp.setAdapter(fragmentAdapter);
-        tabEntitys.add(new MyBtnEntity("首页",0,0));
-        tabEntitys.add(new MyBtnEntity("视频",0,0));
-        tabEntitys.add(new MyBtnEntity("微头条",0,0));
-        tabEntitys.add(new MyBtnEntity("我的",0,0));
+        tabEntitys.add(new MyBtnEntity("首页",R.drawable.home_true,R.drawable.home_false));
+        tabEntitys.add(new MyBtnEntity("视频",R.drawable.video_true,R.drawable.video_false));
+        tabEntitys.add(new MyBtnEntity("微头条",R.drawable.toutiao_true,R.drawable.toutiao_false));
+        tabEntitys.add(new MyBtnEntity("我的",R.drawable.my_true,R.drawable.my_false));
         tab.setTabData(tabEntitys);
         tab.setOnTabSelectListener(new OnTabSelectListener() {
             @Override

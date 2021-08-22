@@ -27,11 +27,13 @@
                 android:layout_height="35dp"
                 android:layout_margin="15dp"
                 android:background="@drawable/item_edit"
-                android:hint="搜你想搜的"></EditText>
+                android:hint="搜你想搜的"
+                android:drawableLeft="@drawable/fdj"></EditText>
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_margin="8dp"></ImageView>
+                android:layout_margin="8dp"
+                android:src="@drawable/share"></ImageView>
         </LinearLayout>
     </LinearLayout>
 
