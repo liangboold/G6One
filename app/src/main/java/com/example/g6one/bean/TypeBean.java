@@ -49,9 +49,23 @@ public class TypeBean {
         this.data = data;
     }
 
+    @Override
+    public String toString() {
+        return "TypeBean{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                '}';
+    }
+
     public static class DataBean {
         private int id;
         private String typename;
+
+        public DataBean(int id, String typename) {
+            this.id = id;
+            this.typename = typename;
+        }
 
         public int getId() {
             return id;

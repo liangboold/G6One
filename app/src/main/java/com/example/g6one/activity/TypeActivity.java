@@ -9,43 +9,85 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.bw.net.RetrofitFactory;
+import com.bw.net.protocol.BaseRespEntry;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.g6one.Api;
+import com.example.g6one.BR;
 import com.example.g6one.bean.NewsTypeBean;
 import com.example.g6one.R;
 import com.example.g6one.bean.TypeBean;
+
+import com.example.g6one.databinding.ActivityMainBinding;
+import com.example.g6one.viewmodel.MyViewModel;
+import com.example.mvvm_lib.view.BaseMVVMActivity;
+import com.example.mvvm_lib.viewmodel.BaseViewModel;
+import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class TypeActivity extends AppCompatActivity {
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
+public class TypeActivity extends BaseMVVMActivity<MyViewModel, ActivityMainBinding> {
     ArrayList<NewsTypeBean> data = new ArrayList<>();
+    ArrayList<String> list = new ArrayList<>();
     private RecyclerView newsType;
     private Button next;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected MyViewModel createViewModel() {
+        return new MyViewModel(this);
+    }
+
+    @Override
+    protected void initEvent() {
         initView();
         initData();
     }
 
+    @Override
+    protected void loadData() {
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void prepareSetVars(HashMap mMap) {
+        mMap.put(BR.MyViewModel,mViewModel);
+    }
+
     private void initData() {
-        OkGo.<String>get("http://39.98.153.96:8080/api/NewsType/getAllTypes")
-                .execute(new StringCallback() {
+        RetrofitFactory.getRetrofitFactory().createRetrofit().create(Api.class)
+                .getType()
+                .observe(TypeActivity.this, new Observer<BaseRespEntry<ArrayList<TypeBean.DataBean>>>() {
                     @Override
-                    public void onSuccess(Response<String> response) {
-                        TypeBean typeBean = JSON.parseObject(response.body(), TypeBean.class);
-                        for (TypeBean.DataBean datum : typeBean.getData()) {
-                            data.add(new NewsTypeBean(datum,false));
+                    public void onChanged(BaseRespEntry<ArrayList<TypeBean.DataBean>> arrayListBaseRespEntry) {
+                        ArrayList<TypeBean.DataBean> arrlist = arrayListBaseRespEntry.getData();
+                        for (int i = 0; i < arrlist.size(); i++) {
+                            Gson gson = new Gson();
+                            TypeBean.DataBean typeBean = gson.fromJson(String.valueOf(arrlist.get(i)), TypeBean.DataBean.class);
+                            data.add(new NewsTypeBean(typeBean,false));
                         }
+
                         NewsTypeAdapter newsTypeAdapter = new NewsTypeAdapter(data);
                         newsType.setAdapter(newsTypeAdapter);
                         newsTypeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -53,8 +95,10 @@ public class TypeActivity extends AppCompatActivity {
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                 if (data.get(position).isIschecked()){
                                     data.get(position).setIschecked(false);
+                                    list.remove(data.get(position).getDataBean().getTypename());
                                 }else {
                                     data.get(position).setIschecked(true);
+                                    list.add(data.get(position).getDataBean().getTypename());
                                 }
                                 newsTypeAdapter.notifyItemChanged(position);
                             }
@@ -65,6 +109,8 @@ public class TypeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TypeActivity.this, HomeActivity.class);
+                System.out.println(list);
+                intent.putStringArrayListExtra("list",list);
                 startActivity(intent);
             }
         });

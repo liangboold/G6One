@@ -2,10 +2,12 @@ package com.example.g6one.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 
@@ -39,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
         list.add(new VideoFragment());
         list.add(new WTouTiaoFragment());
         list.add(new MyFragment());
-        FragmentAdapter fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), list);
+        FragmentAdapter fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,list);
         vp.setAdapter(fragmentAdapter);
         tabEntitys.add(new MyBtnEntity("首页",R.drawable.home_true,R.drawable.home_false));
         tabEntitys.add(new MyBtnEntity("视频",R.drawable.video_true,R.drawable.video_false));

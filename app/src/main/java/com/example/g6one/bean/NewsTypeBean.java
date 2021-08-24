@@ -1,5 +1,7 @@
 package com.example.g6one.bean;
 
+import java.io.Serializable;
+
 /*
  * @ClassName NewsTypeBean
  * @Description TODO
@@ -7,7 +9,7 @@ package com.example.g6one.bean;
  * @Date 2021/8/19 18:57
  * @Version 1.0
  */
-public class NewsTypeBean {
+public class NewsTypeBean implements Serializable {
     private TypeBean.DataBean dataBean;
     private boolean ischecked;
 

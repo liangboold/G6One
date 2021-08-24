@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.HomePageFragment">
 
     <LinearLayout
@@ -38,4 +40,33 @@
         </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.flyco.tablayout.CommonTabLayout
+            app:tl_textSelectColor="#f00"
+            app:tl_textUnselectColor="@color/black"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            app:tl_indicator_height="0dp"
+            android:id="@+id/titletab"
+            android:overScrollMode="ifContentScrolls"
+            android:layout_height="@dimen/dp_40"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_height="fill_parent"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:text="＋"/>
+    </LinearLayout>
+
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tabvp"/>
 </LinearLayout>

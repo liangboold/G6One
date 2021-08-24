@@ -17,10 +17,11 @@ import java.util.ArrayList;
 public class FragmentAdapter extends FragmentPagerAdapter {
     private ArrayList<Fragment>list;
 
-    public FragmentAdapter(@NonNull FragmentManager fm, ArrayList<Fragment> list) {
-        super(fm);
+    public FragmentAdapter(@NonNull FragmentManager fm, int behavior,ArrayList<Fragment> list) {
+        super(fm, behavior);
         this.list = list;
     }
+
 
     @NonNull
     @Override
