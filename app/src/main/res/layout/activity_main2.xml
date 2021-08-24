@@ -13,12 +13,10 @@
         android:layout_height="0dp"
         android:layout_weight="9"></androidx.viewpager.widget.ViewPager>
 
-    <com.flyco.tablayout.CommonTabLayout
-        android:id="@+id/tab"
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
+        android:id="@+id/bar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:tl_textSelectColor="#FB6267"
-        app:tl_textUnselectColor="#ccc"
-        android:layout_weight="1"></com.flyco.tablayout.CommonTabLayout>
+        android:layout_weight="1"></com.ashokvarma.bottomnavigation.BottomNavigationBar>
 
 </LinearLayout>
