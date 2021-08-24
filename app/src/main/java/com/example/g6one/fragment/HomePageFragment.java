@@ -7,9 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -21,6 +21,10 @@ import com.example.g6one.entity.MyBtnEntity;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 
 import java.util.ArrayList;
 
@@ -34,6 +38,7 @@ public class HomePageFragment extends Fragment {
     ArrayList<String> list;
     private ViewPager tabvp;
     private CommonTabLayout titletab;
+    private ImageView share;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,7 +65,7 @@ public class HomePageFragment extends Fragment {
 
         for (String s : list) {
             fragments.add(new NewsFragment());
-            customTabEntities.add(new MyBtnEntity(s,0,0));
+            customTabEntities.add(new MyBtnEntity(s, 0, 0));
         }
 
         tabvp.setAdapter(new TabVp(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
@@ -93,17 +98,45 @@ public class HomePageFragment extends Fragment {
 
             }
         });
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UMImage image = new UMImage(getActivity(),"https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2858426577,4189650377&fm=26&gp=0.jpg");//网络图片
+                new ShareAction(getActivity()).withMedia(image).setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                        .setCallback(new UMShareListener() {
+                            @Override
+                            public void onStart(SHARE_MEDIA share_media) {
+
+                            }
+
+                            @Override
+                            public void onResult(SHARE_MEDIA share_media) {
+
+                            }
+
+                            @Override
+                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+                                Log.e("TAG", "onError: "+throwable.getMessage());
+                            }
+
+                            @Override
+                            public void onCancel(SHARE_MEDIA share_media) {
+
+                            }
+                        }).open();
+            }
+        });
     }
 
     private void initView() {
         query = (EditText) inflate.findViewById(R.id.query);
         tabvp = (ViewPager) inflate.findViewById(R.id.tabvp);
         titletab = (CommonTabLayout) inflate.findViewById(R.id.titletab);
+        share = (ImageView) inflate.findViewById(R.id.share);
     }
 
     private class TabVp extends FragmentPagerAdapter {
-
-
         public TabVp(@NonNull FragmentManager fm, int behavior) {
             super(fm, behavior);
         }
