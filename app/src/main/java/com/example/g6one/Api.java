@@ -5,12 +5,14 @@ package com.example.g6one;
 import androidx.lifecycle.LiveData;
 
 import com.bw.net.protocol.BaseRespEntry;
+import com.example.g6one.bean.NewsEntity;
 import com.example.g6one.bean.TypeBean;
 
 import java.util.ArrayList;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 /*
  * @ClassName Api
@@ -22,4 +24,7 @@ import retrofit2.http.GET;
 public interface Api {
     @GET("api/NewsType/getAllTypes")
     LiveData<BaseRespEntry<ArrayList<TypeBean.DataBean>>> getType();
+
+    @GET("api/News/getNews?")
+    Observable<NewsEntity> getNews(@Query("newstype")int newstype,@Query("pagenum")int pagenum,@Query("pagesize")int pagesize);
 }

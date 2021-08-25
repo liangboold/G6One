@@ -20,6 +20,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * @package:com.bw.net
@@ -53,6 +54,17 @@ public class RetrofitFactory {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://39.98.153.96:8080/")
                 .addConverterFactory(CustomGsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(LiveDataCallAdapterFactory.create())
+                .client(createOkHttp())
+                .build();
+        return retrofit;
+    }
+
+    public Retrofit GsonRetrofit() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://39.98.153.96:8080/")
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addCallAdapterFactory(LiveDataCallAdapterFactory.create())
                 .client(createOkHttp())

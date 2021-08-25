@@ -7,23 +7,18 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.ashokvarma.bottomnavigation.TextBadgeItem;
 import com.example.g6one.R;
 import com.example.g6one.adapter.FragmentAdapter;
-import com.example.g6one.entity.MyBtnEntity;
 import com.example.g6one.fragment.HomePageFragment;
 import com.example.g6one.fragment.MyFragment;
 import com.example.g6one.fragment.VideoFragment;
 import com.example.g6one.fragment.WTouTiaoFragment;
-import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
-import com.flyco.tablayout.listener.OnTabSelectListener;
 
 import java.util.ArrayList;
 
