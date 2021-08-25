@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -17,10 +18,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.g6one.R;
 import com.example.g6one.activity.MainActivityQuerys;
-import com.example.g6one.entity.MyBtnEntity;
-import com.flyco.tablayout.CommonTabLayout;
-import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.google.android.material.tabs.TabLayout;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -30,15 +29,15 @@ import java.util.ArrayList;
 
 
 public class HomePageFragment extends Fragment {
-    ArrayList<CustomTabEntity> customTabEntities = new ArrayList<>();
+    ArrayList<String> strings = new ArrayList<>();
     View inflate;
     private EditText query;
     ArrayList<Fragment> fragments = new ArrayList<>();
     Intent intent;
     ArrayList<String> list;
     private ViewPager tabvp;
-    private CommonTabLayout titletab;
     private ImageView share;
+    private TabLayout titletab;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,36 +64,24 @@ public class HomePageFragment extends Fragment {
 
         for (String s : list) {
             fragments.add(new NewsFragment());
-            customTabEntities.add(new MyBtnEntity(s, 0, 0));
+            strings.add(s);
         }
-
         tabvp.setAdapter(new TabVp(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
-        titletab.setTabData(customTabEntities);
-        titletab.setOnTabSelectListener(new OnTabSelectListener() {
+        titletab.setupWithViewPager(tabvp);
+        titletab.getTabAt(0).select();
+        titletab.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onTabSelect(int position) {
-                tabvp.setCurrentItem(position);
-            }
-
-            @Override
-            public void onTabReselect(int position) {
-
-            }
-        });
-
-        tabvp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                titletab.setCurrentTab(position);
-            }
-
-            @Override
-            public void onPageSelected(int position) {
+            public void onTabSelected(TabLayout.Tab tab) {
 
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
 
             }
         });
@@ -102,8 +89,8 @@ public class HomePageFragment extends Fragment {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UMImage image = new UMImage(getActivity(),"https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2858426577,4189650377&fm=26&gp=0.jpg");//网络图片
-                new ShareAction(getActivity()).withMedia(image).setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                UMImage image = new UMImage(getActivity(), "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2858426577,4189650377&fm=26&gp=0.jpg");//网络图片
+                new ShareAction(getActivity()).withMedia(image).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN)
                         .setCallback(new UMShareListener() {
                             @Override
                             public void onStart(SHARE_MEDIA share_media) {
@@ -117,7 +104,7 @@ public class HomePageFragment extends Fragment {
 
                             @Override
                             public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-                                Log.e("TAG", "onError: "+throwable.getMessage());
+                                Log.e("TAG", "onError: " + throwable.getMessage());
                             }
 
                             @Override
@@ -132,8 +119,8 @@ public class HomePageFragment extends Fragment {
     private void initView() {
         query = (EditText) inflate.findViewById(R.id.query);
         tabvp = (ViewPager) inflate.findViewById(R.id.tabvp);
-        titletab = (CommonTabLayout) inflate.findViewById(R.id.titletab);
         share = (ImageView) inflate.findViewById(R.id.share);
+        titletab = (TabLayout) inflate.findViewById(R.id.titletab);
     }
 
     private class TabVp extends FragmentPagerAdapter {
@@ -152,12 +139,17 @@ public class HomePageFragment extends Fragment {
             return fragments.size();
         }
 
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return strings.get(position);
+        }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        customTabEntities.clear();
+        strings.clear();
         fragments.clear();
     }
 }
