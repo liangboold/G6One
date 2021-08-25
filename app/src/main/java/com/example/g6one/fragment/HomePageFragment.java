@@ -1,13 +1,16 @@
 package com.example.g6one.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,6 +41,7 @@ public class HomePageFragment extends Fragment {
     private ViewPager tabvp;
     private ImageView share;
     private TabLayout titletab;
+    private TextView tabtext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,16 +72,20 @@ public class HomePageFragment extends Fragment {
         }
         tabvp.setAdapter(new TabVp(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
         titletab.setupWithViewPager(tabvp);
-        titletab.getTabAt(0).select();
+        initIndexTab();
         titletab.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
+                float selectsize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, 16, getResources().getDisplayMetrics());
+                tabtext.setTextSize(TypedValue.COMPLEX_UNIT_SP,selectsize);
+                tabtext.setTextColor(Color.parseColor("#ff0000"));
+                tabtext.setText(tab.getText());
+                tab.setCustomView(tabtext);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
+                tab.setCustomView(null);
             }
 
             @Override
@@ -85,6 +93,9 @@ public class HomePageFragment extends Fragment {
 
             }
         });
+
+
+
 
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +127,17 @@ public class HomePageFragment extends Fragment {
         });
     }
 
+    private void initIndexTab() {
+        TabLayout.Tab indextab = titletab.getTabAt(0);
+        float selectsize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, 16, getResources().getDisplayMetrics());
+        tabtext.setTextSize(TypedValue.COMPLEX_UNIT_SP,selectsize);
+        tabtext.setTextColor(Color.parseColor("#ff0000"));
+        tabtext.setText(indextab.getText());
+        indextab.setCustomView(tabtext);
+    }
+
     private void initView() {
+        tabtext = new TextView(getActivity());
         query = (EditText) inflate.findViewById(R.id.query);
         tabvp = (ViewPager) inflate.findViewById(R.id.tabvp);
         share = (ImageView) inflate.findViewById(R.id.share);

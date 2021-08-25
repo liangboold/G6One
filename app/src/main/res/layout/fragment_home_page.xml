@@ -54,6 +54,7 @@
             app:tabIndicatorHeight="0dp"
             android:id="@+id/titletab"
             app:tabMode="scrollable"
+            style="@style/TabText"
             android:layout_height="@dimen/dp_40"/>
 
         <TextView

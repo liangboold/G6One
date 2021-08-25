@@ -2,4 +2,8 @@
     <string name="app_name">G6One</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <style name="TabText">
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">#000</item>
+    </style>
 </resources>
