@@ -1,4 +1,4 @@
-package com.example.g6one.entity;
+package com.example.g6one.bean;
 
 import com.flyco.tablayout.listener.CustomTabEntity;
 

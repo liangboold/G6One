@@ -2,6 +2,7 @@ package com.example.g6one.fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -50,7 +51,6 @@ public class HomePageFragment extends Fragment {
         inflate = inflater.inflate(R.layout.fragment_home_page, container, false);
         intent = getActivity().getIntent();
         list = intent.getStringArrayListExtra("list");
-
         initView();
         initData();
         return inflate;
@@ -80,6 +80,7 @@ public class HomePageFragment extends Fragment {
                 tabtext.setTextSize(TypedValue.COMPLEX_UNIT_SP,selectsize);
                 tabtext.setTextColor(Color.parseColor("#ff0000"));
                 tabtext.setText(tab.getText());
+                tabtext.setTypeface(Typeface.DEFAULT,Typeface.BOLD);
                 tab.setCustomView(tabtext);
             }
 

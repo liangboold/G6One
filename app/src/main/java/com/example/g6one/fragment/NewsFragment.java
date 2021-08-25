@@ -1,5 +1,6 @@
 package com.example.g6one.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,16 +12,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bw.net.RetrofitFactory;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.g6one.Api;
 import com.example.g6one.R;
+
+import com.example.g6one.activity.XiangqingActivity;
 import com.example.g6one.adapter.NewsAdapter;
-import com.example.g6one.entity.NewsEntity;
-import com.example.g6one.viewmodel.NewsViewModel;
-import com.google.gson.Gson;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.model.Response;
+import com.example.g6one.bean.NewsEntity;
 
 import java.util.List;
+
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class NewsFragment extends Fragment {
     private RecyclerView recyclerView;;
@@ -38,17 +45,42 @@ public class NewsFragment extends Fragment {
     }
 
     private void initData() {
-//        OkGo.<String>get("http://v.juhe.cn/toutiao/index?type=top&key=3dc86b09a2ee2477a5baa80ee70fcdf5")
-//                .execute(new StringCallback() {
-//                    @Override
-//                    public void onSuccess(Response<String> response) {
-//                        String body = response.body();
-//                        NewsEntity newsEntity = new Gson().fromJson(body, NewsEntity.class);
-//                        List<NewsEntity.ResultBean.DataBean> data = newsEntity.getResult().getData();
-//                        newsAdapter = new NewsAdapter(data);
-//                        recyclerView.setAdapter(newsAdapter);
-//                    }
-//                });
+        RetrofitFactory.getRetrofitFactory().GsonRetrofit().create(Api.class)
+                .getNews(3,10,10)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<NewsEntity>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull NewsEntity newsEntity) {
+                        List<NewsEntity.DataBean> data = newsEntity.getData();
+                        newsAdapter = new NewsAdapter(data);
+                        recyclerView.setAdapter(newsAdapter);
+                        newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                NewsEntity.DataBean dataBean = newsAdapter.getData().get(position);
+                                Intent intent = new Intent(getActivity(), XiangqingActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
     }
 
     private void initView() {

@@ -4,7 +4,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 
 import com.blankj.utilcode.util.ThreadUtils;
-import com.example.g6one.entity.NewsEntity;
+import com.example.g6one.bean.NewsEntity;
 import com.example.g6one.repository.NewsRepository;
 import com.example.mvvm_lib.viewmodel.BaseViewModel;
 

@@ -2,7 +2,7 @@ package com.example.g6one.repository;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.g6one.entity.NewsEntity;
+import com.example.g6one.bean.NewsEntity;
 import com.example.g6one.model.NewsModel;
 import com.example.mvvm_lib.model.Model;
 import com.example.mvvm_lib.repository.BaseRepository;
