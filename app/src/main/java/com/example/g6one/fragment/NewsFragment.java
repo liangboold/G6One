@@ -15,7 +15,10 @@ import com.bw.net.RetrofitFactory;
 import com.example.g6one.Api;
 import com.example.g6one.R;
 
+import com.example.g6one.adapter.NewsAdapter;
 import com.example.g6one.bean.NewsEntity;
+
+import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -25,7 +28,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class NewsFragment extends Fragment {
     private RecyclerView recyclerView;;
-//    private NewsAdapter newsAdapter;
+    private NewsAdapter newsAdapter;
     private View inflate;
 
     @Override
@@ -51,7 +54,9 @@ public class NewsFragment extends Fragment {
 
                     @Override
                     public void onNext(@NonNull NewsEntity newsEntity) {
-
+                        List<NewsEntity.DataBean> data = newsEntity.getData();
+                        newsAdapter = new NewsAdapter(data);
+                        recyclerView.setAdapter(newsAdapter);
                     }
 
                     @Override

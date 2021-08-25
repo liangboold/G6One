@@ -1,5 +1,7 @@
 package com.example.g6one.bean;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
 import java.util.List;
 
 /**
@@ -68,7 +70,7 @@ public class NewsEntity {
                 '}';
     }
 
-    public static class DataBean {
+    public static class DataBean implements MultiItemEntity {
         private int id;
         private String newscode;
         private int newstypeid;
@@ -80,6 +82,12 @@ public class NewsEntity {
         private String sourceurl;
         private String mainimgurl;
         private String istop;
+
+        @Override
+        public int getItemType() {
+            int length = title.length();
+            return length%3;
+        }
 
         public int getId() {
             return id;
@@ -185,5 +193,7 @@ public class NewsEntity {
                     ", istop='" + istop + '\'' +
                     '}';
         }
+
+
     }
 }

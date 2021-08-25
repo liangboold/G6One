@@ -51,7 +51,6 @@ public class HomePageFragment extends Fragment {
         inflate = inflater.inflate(R.layout.fragment_home_page, container, false);
         intent = getActivity().getIntent();
         list = intent.getStringArrayListExtra("list");
-
         initView();
         initData();
         return inflate;

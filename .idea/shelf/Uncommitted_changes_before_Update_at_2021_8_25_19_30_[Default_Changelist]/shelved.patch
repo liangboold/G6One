@@ -1,0 +1,38 @@
+Index: app/src/main/java/com/example/g6one/fragment/NewsFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.g6one.fragment;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.recyclerview.widget.DividerItemDecoration;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\n\r\nimport com.example.g6one.R;\r\nimport com.example.g6one.adapter.NewsAdapter;\r\nimport com.example.g6one.entity.NewsEntity;\r\nimport com.example.g6one.viewmodel.NewsViewModel;\r\nimport com.google.gson.Gson;\r\nimport com.lzy.okgo.OkGo;\r\nimport com.lzy.okgo.callback.StringCallback;\r\nimport com.lzy.okgo.model.Response;\r\n\r\nimport java.util.List;\r\n\r\npublic class NewsFragment extends Fragment {\r\n    private RecyclerView recyclerView;;\r\n    private NewsAdapter newsAdapter;\r\n    private View inflate;\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        // Inflate the layout for this fragment\r\n        inflate = inflater.inflate(R.layout.fragment_news, container, false);\r\n        initView();\r\n        initData();\r\n        return inflate;\r\n    }\r\n\r\n    private void initData() {\r\n//        OkGo.<String>get(\"http://v.juhe.cn/toutiao/index?type=top&key=3dc86b09a2ee2477a5baa80ee70fcdf5\")\r\n//                .execute(new StringCallback() {\r\n//                    @Override\r\n//                    public void onSuccess(Response<String> response) {\r\n//                        String body = response.body();\r\n//                        NewsEntity newsEntity = new Gson().fromJson(body, NewsEntity.class);\r\n//                        List<NewsEntity.ResultBean.DataBean> data = newsEntity.getResult().getData();\r\n//                        newsAdapter = new NewsAdapter(data);\r\n//                        recyclerView.setAdapter(newsAdapter);\r\n//                    }\r\n//                });\r\n    }\r\n\r\n    private void initView() {\r\n        recyclerView = inflate.findViewById(R.id.rv);\r\n        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));\r\n        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/g6one/fragment/NewsFragment.java	(revision 6d47af93d3cb2c78e50a9187ffbc60a6744e65de)
++++ app/src/main/java/com/example/g6one/fragment/NewsFragment.java	(date 1629871199240)
+@@ -38,17 +38,17 @@
+     }
+ 
+     private void initData() {
+-//        OkGo.<String>get("http://v.juhe.cn/toutiao/index?type=top&key=3dc86b09a2ee2477a5baa80ee70fcdf5")
+-//                .execute(new StringCallback() {
+-//                    @Override
+-//                    public void onSuccess(Response<String> response) {
+-//                        String body = response.body();
+-//                        NewsEntity newsEntity = new Gson().fromJson(body, NewsEntity.class);
+-//                        List<NewsEntity.ResultBean.DataBean> data = newsEntity.getResult().getData();
+-//                        newsAdapter = new NewsAdapter(data);
+-//                        recyclerView.setAdapter(newsAdapter);
+-//                    }
+-//                });
++        OkGo.<String>get("http://v.juhe.cn/toutiao/index?type=top&key=3dc86b09a2ee2477a5baa80ee70fcdf5")
++                .execute(new StringCallback() {
++                    @Override
++                    public void onSuccess(Response<String> response) {
++                        String body = response.body();
++                        NewsEntity newsEntity = new Gson().fromJson(body, NewsEntity.class);
++                        List<NewsEntity.ResultBean.DataBean> data = newsEntity.getResult().getData();
++                        newsAdapter = new NewsAdapter(data);
++                        recyclerView.setAdapter(newsAdapter);
++                    }
++                });
+     }
+ 
+     private void initView() {
