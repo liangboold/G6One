@@ -8,11 +8,13 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.alibaba.fastjson.JSON;
 import com.bw.net.RetrofitFactory;
 import com.bw.net.protocol.BaseRespEntry;
 import com.example.g6one.Api;
 import com.example.g6one.R;
 import com.example.g6one.bean.NewsDetailEntity;
+import com.google.gson.Gson;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
@@ -25,6 +27,7 @@ public class DetailsActivity extends AppCompatActivity {
     private ImageView shouchang;
     private ImageView fenxiang;
     private String newscode;
+    private NewsDetailEntity.DataBean data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,10 @@ public class DetailsActivity extends AppCompatActivity {
                 .observe(this, new Observer<BaseRespEntry<ArrayList<NewsDetailEntity.DataBean>>>() {
                     @Override
                     public void onChanged(BaseRespEntry<ArrayList<NewsDetailEntity.DataBean>> arrayListBaseRespEntry) {
-                        System.out.println(arrayListBaseRespEntry.getData().toString());
+                        String s = JSON.toJSONString(arrayListBaseRespEntry);
+                        NewsDetailEntity newsDetailEntity = JSON.parseObject(s, NewsDetailEntity.class);
+                        data = newsDetailEntity.getData();
+                        System.out.println(data);
                     }
                 });
     }

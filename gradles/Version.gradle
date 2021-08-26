@@ -1,0 +1,17 @@
+ext{
+    dependenciesVersion=[
+        okhttp:"3.12.1",
+        retrofit:"2.6.2",
+        rxjava:"2.6.2",
+        rxbinding:"2.0.0",
+        interceptor:"3.11.0",
+        gsonConverter:"2.6.2",
+        glide:"4.12.0",
+        glideCompiler:"4.12.0",
+        kernel:"2.0.3",
+        headerRefresh:"2.0.3",
+        BaseAdapter:"3.0.0",
+        bottom:"2.0.5",
+        FlycoTabLayout:"2.0.2@aar"
+    ]
+}

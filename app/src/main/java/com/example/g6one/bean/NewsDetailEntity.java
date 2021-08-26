@@ -1,40 +1,28 @@
 package com.example.g6one.bean;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+public class NewsDetailEntity {
 
-public class NewsDetailEntity implements Parcelable {
 
     /**
      * code : 200
-     * data : {"id":10255,"title":"白马银枪赵子龙，智勇双全，为何只能给刘备当\u201c保安队长\u201d？","content":"","url":"http://39.98.153.96:8080/info/3c537ebaa44311e98a15fc7774fd634d.html","newscode":"3c537ebaa44311e98a15fc7774fd634d","auth":"虎头山小妖","publishtime":"2019-07-10 13:05:54","isstaticpage":"1"}
+     * data : {"id":584,"title":"任何没有休斯顿火箭参与的交易都是耍流氓","content":"","url":"http://39.98.153.96:8080/info/29613a0aa17a11e99121fc7774fd634d.html","newscode":"29613a0aa17a11e99121fc7774fd634d","auth":"情有独钟721","publishtime":"2019-07-07 21:49:22","isstaticpage":"1"}
      * msg : 操作成功
      */
 
     private int code;
+    /**
+     * id : 584.0
+     * title : 任何没有休斯顿火箭参与的交易都是耍流氓
+     * content :
+     * url : http://39.98.153.96:8080/info/29613a0aa17a11e99121fc7774fd634d.html
+     * newscode : 29613a0aa17a11e99121fc7774fd634d
+     * auth : 情有独钟721
+     * publishtime : 2019-07-07 21:49:22
+     * isstaticpage : 1
+     */
+
     private DataBean data;
     private String msg;
-
-
-    public NewsDetailEntity() {
-    }
-
-    protected NewsDetailEntity(Parcel in) {
-        code = in.readInt();
-        msg = in.readString();
-    }
-
-    public static final Creator<NewsDetailEntity> CREATOR = new Creator<NewsDetailEntity>() {
-        @Override
-        public NewsDetailEntity createFromParcel(Parcel in) {
-            return new NewsDetailEntity(in);
-        }
-
-        @Override
-        public NewsDetailEntity[] newArray(int size) {
-            return new NewsDetailEntity[size];
-        }
-    };
 
     public int getCode() {
         return code;
@@ -61,29 +49,16 @@ public class NewsDetailEntity implements Parcelable {
     }
 
     @Override
-    public int describeContents() {
-        return 0;
+    public String toString() {
+        return "NewsDetailEntity{" +
+                "code=" + code +
+                ", data=" + data +
+                ", msg='" + msg + '\'' +
+                '}';
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(code);
-        dest.writeString(msg);
-    }
-
-    public static class DataBean implements Parcelable{
-        /**
-         * id : 10255
-         * title : 白马银枪赵子龙，智勇双全，为何只能给刘备当“保安队长”？
-         * content :
-         * url : http://39.98.153.96:8080/info/3c537ebaa44311e98a15fc7774fd634d.html
-         * newscode : 3c537ebaa44311e98a15fc7774fd634d
-         * auth : 虎头山小妖
-         * publishtime : 2019-07-10 13:05:54
-         * isstaticpage : 1
-         */
-
-        private int id;
+    public static class DataBean {
+        private double id;
         private String title;
         private String content;
         private String url;
@@ -92,34 +67,11 @@ public class NewsDetailEntity implements Parcelable {
         private String publishtime;
         private String isstaticpage;
 
-        protected DataBean(Parcel in) {
-            id = in.readInt();
-            title = in.readString();
-            content = in.readString();
-            url = in.readString();
-            newscode = in.readString();
-            auth = in.readString();
-            publishtime = in.readString();
-            isstaticpage = in.readString();
-        }
-
-        public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
-            @Override
-            public DataBean createFromParcel(Parcel in) {
-                return new DataBean(in);
-            }
-
-            @Override
-            public DataBean[] newArray(int size) {
-                return new DataBean[size];
-            }
-        };
-
-        public int getId() {
+        public double getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(double id) {
             this.id = id;
         }
 
@@ -180,20 +132,17 @@ public class NewsDetailEntity implements Parcelable {
         }
 
         @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeInt(id);
-            dest.writeString(title);
-            dest.writeString(content);
-            dest.writeString(url);
-            dest.writeString(newscode);
-            dest.writeString(auth);
-            dest.writeString(publishtime);
-            dest.writeString(isstaticpage);
+        public String toString() {
+            return "DataBean{" +
+                    "id=" + id +
+                    ", title='" + title + '\'' +
+                    ", content='" + content + '\'' +
+                    ", url='" + url + '\'' +
+                    ", newscode='" + newscode + '\'' +
+                    ", auth='" + auth + '\'' +
+                    ", publishtime='" + publishtime + '\'' +
+                    ", isstaticpage='" + isstaticpage + '\'' +
+                    '}';
         }
     }
 }
