@@ -109,7 +109,6 @@ public class TypeActivity extends BaseMVVMActivity<MyViewModel, ActivityMainBind
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TypeActivity.this, HomeActivity.class);
-                System.out.println(list);
                 intent.putStringArrayListExtra("list",list);
                 startActivity(intent);
             }

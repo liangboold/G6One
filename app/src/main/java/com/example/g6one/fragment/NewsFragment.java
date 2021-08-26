@@ -3,6 +3,7 @@ package com.example.g6one.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,15 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bw.net.RetrofitFactory;
+import com.bw.net.protocol.BaseRespEntry;
 import com.example.g6one.Api;
 import com.example.g6one.R;
 
 import com.example.g6one.adapter.NewsAdapter;
 import com.example.g6one.bean.NewsEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -42,33 +44,19 @@ public class NewsFragment extends Fragment {
     }
 
     private void initData() {
-        RetrofitFactory.getRetrofitFactory().GsonRetrofit().create(Api.class)
+        RetrofitFactory.getRetrofitFactory().createRetrofit().create(Api.class)
                 .getNews(3,10,10)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<NewsEntity>() {
+                .observe(getActivity(), new Observer<BaseRespEntry<ArrayList<NewsEntity.DataBean>>>() {
                     @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull NewsEntity newsEntity) {
-                        List<NewsEntity.DataBean> data = newsEntity.getData();
-                        newsAdapter = new NewsAdapter(data);
-                        recyclerView.setAdapter(newsAdapter);
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
+                    public void onChanged(BaseRespEntry<ArrayList<NewsEntity.DataBean>> arrayListBaseRespEntry) {
+                        ArrayList<NewsEntity.DataBean> data = arrayListBaseRespEntry.getData();
 
                     }
                 });
+
+//        List<NewsEntity.DataBean> data = newsEntity.getData();
+//        newsAdapter = new NewsAdapter(data);
+//        recyclerView.setAdapter(newsAdapter);
 
     }
 

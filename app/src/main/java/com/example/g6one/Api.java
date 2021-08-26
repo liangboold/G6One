@@ -26,5 +26,5 @@ public interface Api {
     LiveData<BaseRespEntry<ArrayList<TypeBean.DataBean>>> getType();
 
     @GET("api/News/getNews?")
-    Observable<NewsEntity> getNews(@Query("newstype")int newstype,@Query("pagenum")int pagenum,@Query("pagesize")int pagesize);
+    LiveData<BaseRespEntry<ArrayList<NewsEntity.DataBean>>> getNews(@Query("newstype")int newstype,@Query("pagenum")int pagenum,@Query("pagesize")int pagesize);
 }

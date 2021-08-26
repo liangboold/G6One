@@ -86,7 +86,7 @@ public class NewsEntity {
         @Override
         public int getItemType() {
             int length = title.length();
-            return length%3;
+            return length % 3;
         }
 
         public int getId() {
@@ -177,6 +177,7 @@ public class NewsEntity {
             this.istop = istop;
         }
 
+
         @Override
         public String toString() {
             return "DataBean{" +
@@ -193,7 +194,5 @@ public class NewsEntity {
                     ", istop='" + istop + '\'' +
                     '}';
         }
-
-
     }
 }
