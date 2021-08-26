@@ -1,75 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.HomePageFragment">
+    >
+    <data class="HomeFragment">
+        <variable
+            name="HomePageFragment"
+            type="com.example.g6one.fragment.HomePageFragment" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="#D33E42">
+        android:layout_height="match_parent"
+        tools:context=".fragment.HomePageFragment"
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
+            android:layout_height="80dp"
+            android:background="#D33E42">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="微头条"
+                    android:textColor="#fff"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_margin="15dp"></TextView>
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="35dp"
+                    android:layout_margin="15dp"
+                    android:id="@+id/query"
+                    android:background="@drawable/item_edit"
+                    android:hint="搜你想搜的"
+                    android:drawableLeft="@drawable/fdj"></EditText>
+                <ImageView
+                    android:id="@+id/share"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/share"></ImageView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/titletab"
+                style="@style/TabText"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_40"
+                android:layout_weight="5"
+                app:tabIndicatorHeight="0dp"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="#f00"
+                app:tabTextColor="@color/black" />
+
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="微头条"
-                android:textColor="#fff"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_margin="15dp"></TextView>
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="35dp"
-                android:layout_margin="15dp"
-                android:id="@+id/query"
-                android:background="@drawable/item_edit"
-                android:hint="搜你想搜的"
-                android:drawableLeft="@drawable/fdj"></EditText>
-            <ImageView
-                android:id="@+id/share"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_margin="8dp"
-                android:src="@drawable/share"></ImageView>
+                android:layout_marginRight="15dp"
+                android:layout_height="fill_parent"
+                android:textSize="30dp"
+                android:gravity="center"
+                android:text="＋"/>
         </LinearLayout>
+
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tabvp"/>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/titletab"
-            style="@style/TabText"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dp_40"
-            android:layout_weight="5"
-            app:tabIndicatorHeight="0dp"
-            app:tabMode="scrollable"
-            app:tabSelectedTextColor="#f00"
-            app:tabTextColor="@color/black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_marginRight="15dp"
-            android:layout_height="fill_parent"
-            android:textSize="30dp"
-            android:gravity="center"
-            android:text="＋"/>
-    </LinearLayout>
-
-
-
-    <androidx.viewpager.widget.ViewPager
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tabvp"/>
-</LinearLayout>
+</layout>

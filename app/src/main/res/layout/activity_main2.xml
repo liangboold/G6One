@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.HomeActivity"
-    android:orientation="vertical">
+   >
+    <data class="Homeactivity">
+        <variable
+            name="homeactivity"
+            type="com.example.g6one.activity.HomeActivity" />
+    </data>
 
-    <androidx.viewpager.widget.ViewPager
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="9"></androidx.viewpager.widget.ViewPager>
 
-    <com.ashokvarma.bottomnavigation.BottomNavigationBar
+        <com.ashokvarma.bottomnavigation.BottomNavigationBar
         android:id="@+id/bar"
         android:layout_width="match_parent"
         android:layout_height="56dp"></com.ashokvarma.bottomnavigation.BottomNavigationBar>
-
-</LinearLayout>
+    </LinearLayout>
+</layout>

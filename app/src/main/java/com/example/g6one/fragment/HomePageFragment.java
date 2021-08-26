@@ -3,14 +3,9 @@ package com.example.g6one.fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,11 +13,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
+import com.example.g6one.BR;
 import com.example.g6one.R;
 import com.example.g6one.activity.MainActivityQuerys;
-import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.example.g6one.databinding.HomeFragment;
+import com.example.g6one.viewmodel.NewsViewModel;
+import com.example.mvvm_lib.view.BaseMVVMFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
@@ -30,35 +27,20 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
-public class HomePageFragment extends Fragment {
+public class HomePageFragment extends BaseMVVMFragment<NewsViewModel, HomeFragment> {
     ArrayList<String> strings = new ArrayList<>();
-    View inflate;
-    private EditText query;
     ArrayList<Fragment> fragments = new ArrayList<>();
     Intent intent;
     ArrayList<String> list;
-    private ViewPager tabvp;
-    private ImageView share;
-    private TabLayout titletab;
     private TextView tabtext;
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        inflate = inflater.inflate(R.layout.fragment_home_page, container, false);
-        intent = getActivity().getIntent();
-        list = intent.getStringArrayListExtra("list");
-        initView();
-        initData();
-        return inflate;
-    }
-
-
-    private void initData() {
-        query.setOnClickListener(new View.OnClickListener() {
+    protected void initEvent() {
+        mBinding.query.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MainActivityQuerys.class);
@@ -66,14 +48,7 @@ public class HomePageFragment extends Fragment {
             }
         });
 
-        for (String s : list) {
-            fragments.add(new NewsFragment());
-            strings.add(s);
-        }
-        tabvp.setAdapter(new TabVp(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
-        titletab.setupWithViewPager(tabvp);
-        initIndexTab();
-        titletab.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        mBinding.titletab.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 float selectsize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, 16, getResources().getDisplayMetrics());
@@ -95,10 +70,7 @@ public class HomePageFragment extends Fragment {
             }
         });
 
-
-
-
-        share.setOnClickListener(new View.OnClickListener() {
+        mBinding.share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 UMImage image = new UMImage(getActivity(), "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2858426577,4189650377&fm=26&gp=0.jpg");//网络图片
@@ -128,8 +100,42 @@ public class HomePageFragment extends Fragment {
         });
     }
 
+    @Override
+    protected void loadData() {
+        initView();
+        initData();
+    }
+
+    @Override
+    protected void prepareSetVars(HashMap<Integer, Object> mMap) {
+        mMap.put(BR.HomePageFragment,this);
+    }
+
+    @Override
+    protected NewsViewModel createViewModel() {
+        return new NewsViewModel(this);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_home_page;
+    }
+
+
+    private void initData() {
+
+
+        for (String s : list) {
+            fragments.add(new NewsFragment());
+            strings.add(s);
+        }
+        mBinding.tabvp.setAdapter(new TabVp(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
+        mBinding.titletab.setupWithViewPager(mBinding.tabvp);
+        initIndexTab();
+    }
+
     private void initIndexTab() {
-        TabLayout.Tab indextab = titletab.getTabAt(0);
+        TabLayout.Tab indextab = mBinding.titletab.getTabAt(0);
         float selectsize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, 16, getResources().getDisplayMetrics());
         tabtext.setTextSize(TypedValue.COMPLEX_UNIT_SP,selectsize);
         tabtext.setTextColor(Color.parseColor("#ff0000"));
@@ -138,11 +144,9 @@ public class HomePageFragment extends Fragment {
     }
 
     private void initView() {
+        intent = getActivity().getIntent();
+        list = intent.getStringArrayListExtra("list");
         tabtext = new TextView(getActivity());
-        query = (EditText) inflate.findViewById(R.id.query);
-        tabvp = (ViewPager) inflate.findViewById(R.id.tabvp);
-        share = (ImageView) inflate.findViewById(R.id.share);
-        titletab = (TabLayout) inflate.findViewById(R.id.titletab);
     }
 
     private class TabVp extends FragmentPagerAdapter {
