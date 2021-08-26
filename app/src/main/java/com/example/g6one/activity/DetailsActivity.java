@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.bw.net.RetrofitFactory;
@@ -28,6 +30,12 @@ public class DetailsActivity extends AppCompatActivity {
     private ImageView fenxiang;
     private String newscode;
     private NewsDetailEntity.DataBean data;
+    private TextView titlexiang;
+    private TextView timexiang;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +56,9 @@ public class DetailsActivity extends AppCompatActivity {
                         NewsDetailEntity newsDetailEntity = JSON.parseObject(s, NewsDetailEntity.class);
                         data = newsDetailEntity.getData();
                         System.out.println(data);
+                        tbsWvMain.loadUrl(data.getUrl());
+                        titlexiang.setText(data.getTitle());
+                        timexiang.setText(data.getPublishtime());
                     }
                 });
     }
@@ -60,7 +71,6 @@ public class DetailsActivity extends AppCompatActivity {
                 return super.shouldOverrideUrlLoading(webView, s);
             }
         });
-        tbsWvMain.loadUrl("https://www.baidu.com/");
     }
 
     private void initView() {
@@ -70,6 +80,8 @@ public class DetailsActivity extends AppCompatActivity {
         shouchang = (ImageView) findViewById(R.id.shouchang);
         fenxiang = (ImageView) findViewById(R.id.fenxiang);
         newscode = getIntent().getStringExtra("newscode");
+        titlexiang = (TextView) findViewById(R.id.titlexiang);
+        timexiang = (TextView) findViewById(R.id.timexiang);
     }
 
 }
