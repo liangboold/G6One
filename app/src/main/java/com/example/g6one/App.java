@@ -88,4 +88,8 @@ public class App extends Application {
         map.put(TbsCoreSettings.TBS_SETTINGS_USE_DEXLOADER_SERVICE, true);
         QbSdk.initTbsSettings(map);
     }
+
+    public static void immersion(){
+
+    }
 }

@@ -77,7 +77,7 @@ public class MainActivityQuerys extends AppCompatActivity {
         int v = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 |View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
         decorView.setSystemUiVisibility(v);
-        getWindow().setStatusBarColor(Color.GRAY);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
         ButterKnife.bind(this);
         //默认账号
         String username = "a";
