@@ -78,13 +78,13 @@ public class TypeActivity extends BaseMVVMActivity<MyViewModel, ActivityMainBind
     private void initData() {
         RetrofitFactory.getRetrofitFactory().createRetrofit().create(Api.class)
                 .getType()
-                .observe(TypeActivity.this, new Observer<BaseRespEntry<ArrayList<TypeBean.DataBean>>>() {
+                .observe(this, new Observer<BaseRespEntry<ArrayList<TypeBean.DataBean>>>() {
                     @Override
                     public void onChanged(BaseRespEntry<ArrayList<TypeBean.DataBean>> arrayListBaseRespEntry) {
-                        ArrayList<TypeBean.DataBean> arrlist = arrayListBaseRespEntry.getData();
-                        for (int i = 0; i < arrlist.size(); i++) {
+                        ArrayList<TypeBean.DataBean> arraylist = arrayListBaseRespEntry.getData();
+                        for (int i = 0; i < arraylist.size(); i++) {
                             Gson gson = new Gson();
-                            TypeBean.DataBean typeBean = gson.fromJson(String.valueOf(arrlist.get(i)), TypeBean.DataBean.class);
+                            TypeBean.DataBean typeBean = gson.fromJson(String.valueOf(arraylist.get(i)), TypeBean.DataBean.class);
                             data.add(new NewsTypeBean(typeBean,false));
                         }
 

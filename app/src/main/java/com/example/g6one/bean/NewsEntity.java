@@ -1,5 +1,8 @@
 package com.example.g6one.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
 import java.util.List;
@@ -61,16 +64,7 @@ public class NewsEntity {
         this.data = data;
     }
 
-    @Override
-    public String toString() {
-        return "NewsEntity{" +
-                "code=" + code +
-                ", msg='" + msg + '\'' +
-                ", data=" + data +
-                '}';
-    }
-
-    public static class DataBean implements MultiItemEntity {
+    public static class DataBean implements MultiItemEntity, Parcelable {
         private int id;
         private String newscode;
         private int newstypeid;
@@ -82,12 +76,6 @@ public class NewsEntity {
         private String sourceurl;
         private String mainimgurl;
         private String istop;
-
-        @Override
-        public int getItemType() {
-            int length = title.length();
-            return length % 3;
-        }
 
         public int getId() {
             return id;
@@ -178,21 +166,38 @@ public class NewsEntity {
         }
 
 
+
+        @Override
+        public int getItemType() {
+            int length = title.length();
+            return length % 3;
+        }
+
         @Override
         public String toString() {
-            return "DataBean{" +
-                    "id=" + id +
-                    ", newscode='" + newscode + '\'' +
-                    ", newstypeid=" + newstypeid +
-                    ", sourcesiteid=" + sourcesiteid +
-                    ", sourcesitename='" + sourcesitename + '\'' +
-                    ", title='" + title + '\'' +
-                    ", description='" + description + '\'' +
-                    ", auth='" + auth + '\'' +
-                    ", sourceurl='" + sourceurl + '\'' +
-                    ", mainimgurl='" + mainimgurl + '\'' +
-                    ", istop='" + istop + '\'' +
+            return "DataBean:{" +
+                    "id:" + id +
+                    ", newscode:'" + newscode + '\'' +
+                    ", newstypeid:" + newstypeid +
+                    ", sourcesiteid:" + sourcesiteid +
+                    ", sourcesitename:'" + sourcesitename + '\'' +
+                    ", title:'" + title + '\'' +
+                    ", description:'" + description + '\'' +
+                    ", auth:'" + auth + '\'' +
+                    ", sourceurl:'" + sourceurl + '\'' +
+                    ", mainimgurl:'" + mainimgurl + '\'' +
+                    ", istop:'" + istop + '\'' +
                     '}';
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+
         }
     }
 }

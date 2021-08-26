@@ -61,17 +61,6 @@ public class RetrofitFactory {
         return retrofit;
     }
 
-    public Retrofit GsonRetrofit() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://39.98.153.96:8080/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addCallAdapterFactory(LiveDataCallAdapterFactory.create())
-                .client(createOkHttp())
-                .build();
-        return retrofit;
-    }
-
     private OkHttpClient createOkHttp() {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .readTimeout(Config.TIMEOUT, TimeUnit.SECONDS)

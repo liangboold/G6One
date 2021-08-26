@@ -1,5 +1,6 @@
 package com.example.g6one.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,24 +13,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.fastjson.JSON;
 import com.bw.net.RetrofitFactory;
+
 import com.bw.net.protocol.BaseRespEntry;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.g6one.Api;
 import com.example.g6one.R;
 
+import com.example.g6one.activity.DetailsActivity;
 import com.example.g6one.adapter.NewsAdapter;
 import com.example.g6one.bean.NewsEntity;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-
 public class NewsFragment extends Fragment {
-    private RecyclerView recyclerView;;
+    private RecyclerView recyclerView;
     private NewsAdapter newsAdapter;
     private View inflate;
 
@@ -49,14 +51,22 @@ public class NewsFragment extends Fragment {
                 .observe(getActivity(), new Observer<BaseRespEntry<ArrayList<NewsEntity.DataBean>>>() {
                     @Override
                     public void onChanged(BaseRespEntry<ArrayList<NewsEntity.DataBean>> arrayListBaseRespEntry) {
-                        ArrayList<NewsEntity.DataBean> data = arrayListBaseRespEntry.getData();
-
+                        String s = JSON.toJSONString(arrayListBaseRespEntry);
+                        NewsEntity newsEntity = JSON.parseObject(s, NewsEntity.class);
+                        List<NewsEntity.DataBean> data = newsEntity.getData();
+                        newsAdapter = new NewsAdapter(data);
+                        recyclerView.setAdapter(newsAdapter);
+                        System.out.println(data);
+                        newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                                intent.putExtra("newscode",data.get(position).getNewscode());
+                                startActivity(intent);
+                            }
+                        });
                     }
                 });
-
-//        List<NewsEntity.DataBean> data = newsEntity.getData();
-//        newsAdapter = new NewsAdapter(data);
-//        recyclerView.setAdapter(newsAdapter);
 
     }
 
