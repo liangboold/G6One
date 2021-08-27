@@ -8,9 +8,15 @@
           type="com.example.g6one.fragment.NewsFragment" />
    </data>
 
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/rv"
+   <com.jwenfeng.library.pulltorefresh.PullToRefreshLayout
+       android:id="@+id/pull"
        android:layout_width="match_parent"
-       android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+       android:layout_height="match_parent">
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/rv"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+   </com.jwenfeng.library.pulltorefresh.PullToRefreshLayout>
+
 
 </layout>

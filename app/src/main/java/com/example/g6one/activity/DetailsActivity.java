@@ -5,9 +5,14 @@ import androidx.lifecycle.Observer;
 
 import android.os.Bundle;
 import android.util.Log;
+
+import android.view.MotionEvent;
+
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 
@@ -31,6 +36,10 @@ import java.util.HashMap;
 public class DetailsActivity extends BaseMVVMActivity<MyViewModel, Detailsactivity> {
     private String newscode;
     private NewsDetailEntity.DataBean data;
+    private TextView actDetailHeadTitle;
+    private ScrollView actDetailScrollView;
+    private RelativeLayout headLayout;
+
 
     @Override
     protected MyViewModel createViewModel() {
@@ -75,6 +84,25 @@ public class DetailsActivity extends BaseMVVMActivity<MyViewModel, Detailsactivi
                         mBinding.timexiang.setText(data.getPublishtime());
                     }
                 });
+
+    }
+
+    private void ScrollViewEvent() {
+        actDetailScrollView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_MOVE){
+                    int height = headLayout.getHeight();
+                    int scaleY = actDetailScrollView.getScrollY();
+                    if(scaleY>=height){
+                        actDetailHeadTitle.setVisibility(View.VISIBLE);
+                    }else{
+                        actDetailHeadTitle.setVisibility(View.INVISIBLE);
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     private void initData() {
