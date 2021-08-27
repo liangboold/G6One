@@ -20,29 +20,49 @@ import com.bw.net.protocol.BaseRespEntry;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.g6one.Api;
+import com.example.g6one.BR;
 import com.example.g6one.R;
 
 import com.example.g6one.activity.DetailsActivity;
 import com.example.g6one.adapter.NewsAdapter;
 import com.example.g6one.bean.NewsEntity;
+import com.example.g6one.databinding.Newsfragment;
+import com.example.g6one.viewmodel.NewsViewModel;
+import com.example.mvvm_lib.view.BaseMVVMFragment;
 import com.google.gson.Gson;
+import com.jwenfeng.library.pulltorefresh.BaseRefreshListener;
+import com.jwenfeng.library.pulltorefresh.PullToRefreshLayout;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class NewsFragment extends Fragment {
-    private RecyclerView recyclerView;
+public class NewsFragment extends BaseMVVMFragment<NewsViewModel, Newsfragment> {
     private NewsAdapter newsAdapter;
-    private View inflate;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        inflate = inflater.inflate(R.layout.fragment_news, container, false);
-        initView();
+    protected void initEvent() {
         initData();
-        return inflate;
+    }
+
+    @Override
+    protected void loadData() {
+        initView();
+    }
+
+    @Override
+    protected void prepareSetVars(HashMap<Integer, Object> mMap) {
+        mMap.put(BR.news,this);
+    }
+
+    @Override
+    protected NewsViewModel createViewModel() {
+        return new NewsViewModel(this);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_news;
     }
 
     private void initData() {
@@ -55,7 +75,7 @@ public class NewsFragment extends Fragment {
                         NewsEntity newsEntity = JSON.parseObject(s, NewsEntity.class);
                         List<NewsEntity.DataBean> data = newsEntity.getData();
                         newsAdapter = new NewsAdapter(data);
-                        recyclerView.setAdapter(newsAdapter);
+                        mBinding.rv.setAdapter(newsAdapter);
                         System.out.println(data);
                         newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                             @Override
@@ -68,11 +88,21 @@ public class NewsFragment extends Fragment {
                     }
                 });
 
+        mBinding.pull.setRefreshListener(new BaseRefreshListener() {
+            @Override
+            public void refresh() {
+                mBinding.pull.finishRefresh();
+            }
+
+            @Override
+            public void loadMore() {
+                mBinding.pull.finishLoadMore();
+            }
+        });
+
     }
 
     private void initView() {
-        recyclerView = inflate.findViewById(R.id.rv);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+        mBinding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 }

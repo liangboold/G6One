@@ -73,11 +73,6 @@ public class MainActivityQuerys extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_querys);
-        View decorView = getWindow().getDecorView();
-        int v = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                |View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-        decorView.setSystemUiVisibility(v);
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
         ButterKnife.bind(this);
         //默认账号
         String username = "a";

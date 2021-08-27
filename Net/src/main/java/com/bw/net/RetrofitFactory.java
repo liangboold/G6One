@@ -52,7 +52,7 @@ public class RetrofitFactory {
 
     public Retrofit createRetrofit() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BuildConfig.BASEURL)  //BuildConfig如果未生成，在设置->file types忽略文件删除build;
+                .baseUrl(BuildConfig.BASEURL)  //"BuildConfig"如果未生成，在设置->file types忽略文件删除build;
                 .addConverterFactory(CustomGsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addCallAdapterFactory(LiveDataCallAdapterFactory.create())

@@ -1,49 +1,70 @@
 package com.example.g6one.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.lifecycle.Observer;
 
 import android.os.Bundle;
 import android.util.Log;
+
+import android.view.MotionEvent;
+
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.alibaba.fastjson.JSON;
 import com.bw.net.RetrofitFactory;
 import com.bw.net.protocol.BaseRespEntry;
 import com.example.g6one.Api;
+import com.example.g6one.BR;
 import com.example.g6one.R;
 import com.example.g6one.bean.NewsDetailEntity;
-import com.google.gson.Gson;
+import com.example.g6one.databinding.Detailsactivity;
+import com.example.g6one.viewmodel.MyViewModel;
+import com.example.mvvm_lib.view.BaseMVVMActivity;
+
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class DetailsActivity extends AppCompatActivity {
-    private WebView tbsWvMain;
-    private EditText pinglun;
-    private ImageView ping;
-    private ImageView shouchang;
-    private ImageView fenxiang;
+public class DetailsActivity extends BaseMVVMActivity<MyViewModel, Detailsactivity> {
     private String newscode;
     private NewsDetailEntity.DataBean data;
-    private TextView titlexiang;
-    private TextView timexiang;
-
-
-
+    private TextView actDetailHeadTitle;
+    private ScrollView actDetailScrollView;
+    private RelativeLayout headLayout;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_xiangqing);
+    protected MyViewModel createViewModel() {
+        return new MyViewModel(this);
+    }
+
+    @Override
+    protected void initEvent() {
+        initData();
+    }
+
+    @Override
+    protected void loadData() {
         initView();
         requestData();
-        initData();
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_xiangqing;
+    }
+
+    @Override
+    protected void prepareSetVars(HashMap mMap) {
+        mMap.put(BR.details,this);
     }
 
     private void requestData() {
@@ -56,15 +77,36 @@ public class DetailsActivity extends AppCompatActivity {
                         NewsDetailEntity newsDetailEntity = JSON.parseObject(s, NewsDetailEntity.class);
                         data = newsDetailEntity.getData();
                         System.out.println(data);
-                        tbsWvMain.loadUrl(data.getUrl());
-                        titlexiang.setText(data.getTitle());
-                        timexiang.setText(data.getPublishtime());
+                        mBinding.loading.setVisibility(View.GONE);
+                        mBinding.view.setVisibility(View.VISIBLE);
+                        mBinding.tbsWvMain.loadUrl(data.getUrl());
+                        mBinding.titlexiang.setText(data.getTitle());
+                        mBinding.timexiang.setText(data.getPublishtime());
                     }
                 });
+
+    }
+
+    private void ScrollViewEvent() {
+        actDetailScrollView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_MOVE){
+                    int height = headLayout.getHeight();
+                    int scaleY = actDetailScrollView.getScrollY();
+                    if(scaleY>=height){
+                        actDetailHeadTitle.setVisibility(View.VISIBLE);
+                    }else{
+                        actDetailHeadTitle.setVisibility(View.INVISIBLE);
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     private void initData() {
-        tbsWvMain.setWebViewClient(new WebViewClient(){
+        mBinding.tbsWvMain.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView webView, String s) {
                 Log.d("123", "shouldOverrideUrlLoading: "+s);
@@ -74,14 +116,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        tbsWvMain = (WebView) findViewById(R.id.tbs_wv_main);
-        pinglun = (EditText) findViewById(R.id.pinglun);
-        ping = (ImageView) findViewById(R.id.ping);
-        shouchang = (ImageView) findViewById(R.id.shouchang);
-        fenxiang = (ImageView) findViewById(R.id.fenxiang);
         newscode = getIntent().getStringExtra("newscode");
-        titlexiang = (TextView) findViewById(R.id.titlexiang);
-        timexiang = (TextView) findViewById(R.id.timexiang);
     }
 
 }

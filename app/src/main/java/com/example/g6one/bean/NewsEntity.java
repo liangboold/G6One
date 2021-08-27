@@ -64,7 +64,7 @@ public class NewsEntity {
         this.data = data;
     }
 
-    public static class DataBean implements MultiItemEntity, Parcelable {
+    public static class DataBean implements MultiItemEntity{
         private int id;
         private String newscode;
         private int newstypeid;
@@ -188,16 +188,6 @@ public class NewsEntity {
                     ", mainimgurl:'" + mainimgurl + '\'' +
                     ", istop:'" + istop + '\'' +
                     '}';
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-
         }
     }
 }

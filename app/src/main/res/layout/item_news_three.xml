@@ -2,16 +2,53 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/item_deit2"
+    android:layout_margin="8dp">
 
     <TextView
         android:id="@+id/text_news_three"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"></TextView>
+        android:layout_margin="15dp"
+        android:textSize="18dp"></TextView>
     <ImageView
         android:id="@+id/image_news_three"
         android:layout_width="match_parent"
-        android:layout_height="210dp"
-        android:layout_margin="3dp"></ImageView>
+        android:layout_height="260dp"
+        android:layout_margin="5dp"></ImageView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_10">
+        <ImageView
+            android:id="@+id/re"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:src="@drawable/re"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"></ImageView>
+        <TextView
+            android:id="@+id/wang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="映象网   评论225"
+            android:textSize="15dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/re"></TextView>
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/close"
+            android:layout_margin="10dp"></ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="刚刚"
+            android:textSize="15dp"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/close"></TextView>
+    </RelativeLayout>
 </LinearLayout>

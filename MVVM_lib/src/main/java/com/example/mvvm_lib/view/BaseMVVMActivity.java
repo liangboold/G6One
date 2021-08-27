@@ -1,6 +1,8 @@
 package com.example.mvvm_lib.view;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,8 +36,17 @@ public abstract class BaseMVVMActivity<VM extends BaseViewModel,Binding extends 
         prepareSetVars(mMap);
         setVars(mBinding,mMap);
 
+        immersion();
         loadData();
         initEvent();
+    }
+
+    protected void immersion(){
+        View decorView = getWindow().getDecorView();
+        int v = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                |View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        decorView.setSystemUiVisibility(v);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
 
     //创建ViewModel实例

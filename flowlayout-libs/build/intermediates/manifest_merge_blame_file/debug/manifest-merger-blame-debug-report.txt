@@ -6,8 +6,8 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="10"
-8-->E:\G6One\flowlayout-libs\src\main\AndroidManifest.xml
+8-->C:\Users\a\Desktop\xiangmu\G6One\flowlayout-libs\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="28" />
-9-->E:\G6One\flowlayout-libs\src\main\AndroidManifest.xml
+9-->C:\Users\a\Desktop\xiangmu\G6One\flowlayout-libs\src\main\AndroidManifest.xml
 10
 11</manifest>
