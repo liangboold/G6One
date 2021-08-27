@@ -2,10 +2,13 @@ package com.example.g6one.repository;
 
 import androidx.lifecycle.LiveData;
 
+import com.bw.net.protocol.BaseRespEntry;
 import com.example.g6one.bean.TypeBean;
 import com.example.g6one.model.MyModel;
 import com.example.mvvm_lib.model.Model;
 import com.example.mvvm_lib.repository.BaseRepository;
+
+import java.util.ArrayList;
 
 /*
  * @ClassName MyRepository
@@ -18,7 +21,7 @@ public class MyRepository extends BaseRepository {
     @Model
     MyModel myModel;
 
-    public LiveData<TypeBean> Type(TypeBean typeBean){
-        return myModel.Type(typeBean);
+    public LiveData<BaseRespEntry<ArrayList<TypeBean>>> Type(){
+        return myModel.Type();
     }
 }

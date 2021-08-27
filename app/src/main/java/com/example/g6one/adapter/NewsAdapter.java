@@ -17,14 +17,14 @@ import java.util.List;
  * @another:HG
  * @email:1572651596@qq.com
  */
-public class NewsAdapter extends BaseMultiItemQuickAdapter<NewsEntity.DataBean, BaseViewHolder> {
+public class NewsAdapter extends BaseMultiItemQuickAdapter<NewsEntity, BaseViewHolder> {
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
      * some initialization data.
      *
      * @param data A new list is created out of this one to avoid mutable list
      */
-    public NewsAdapter(List<NewsEntity.DataBean> data) {
+    public NewsAdapter(List<NewsEntity> data) {
         super(data);
         addItemType(0,R.layout.item_news_one);
         addItemType(1,R.layout.item_news_two);
@@ -32,7 +32,7 @@ public class NewsAdapter extends BaseMultiItemQuickAdapter<NewsEntity.DataBean, 
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, NewsEntity.DataBean item) {
+    protected void convert(BaseViewHolder helper, NewsEntity item) {
         switch (item.getItemType()){
             case 0:
                 helper.setText(R.id.text_news_one,item.getTitle());

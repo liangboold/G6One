@@ -34,12 +34,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DetailsActivity extends BaseMVVMActivity<MyViewModel, Detailsactivity> {
+
     private String newscode;
     private NewsDetailEntity.DataBean data;
     private TextView actDetailHeadTitle;
     private ScrollView actDetailScrollView;
     private RelativeLayout headLayout;
-
 
     @Override
     protected MyViewModel createViewModel() {

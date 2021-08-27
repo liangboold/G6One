@@ -30,8 +30,6 @@ import com.example.g6one.databinding.Newsfragment;
 import com.example.g6one.viewmodel.NewsViewModel;
 import com.example.mvvm_lib.view.BaseMVVMFragment;
 import com.google.gson.Gson;
-import com.jwenfeng.library.pulltorefresh.BaseRefreshListener;
-import com.jwenfeng.library.pulltorefresh.PullToRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,39 +64,36 @@ public class NewsFragment extends BaseMVVMFragment<NewsViewModel, Newsfragment> 
     }
 
     private void initData() {
-        RetrofitFactory.getRetrofitFactory().createRetrofit().create(Api.class)
-                .getNews(3,10,10)
-                .observe(getActivity(), new Observer<BaseRespEntry<ArrayList<NewsEntity.DataBean>>>() {
-                    @Override
-                    public void onChanged(BaseRespEntry<ArrayList<NewsEntity.DataBean>> arrayListBaseRespEntry) {
-                        String s = JSON.toJSONString(arrayListBaseRespEntry);
-                        NewsEntity newsEntity = JSON.parseObject(s, NewsEntity.class);
-                        List<NewsEntity.DataBean> data = newsEntity.getData();
-                        newsAdapter = new NewsAdapter(data);
-                        mBinding.rv.setAdapter(newsAdapter);
-                        System.out.println(data);
-                        newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                                Intent intent = new Intent(getActivity(), DetailsActivity.class);
-                                intent.putExtra("newscode",data.get(position).getNewscode());
-                                startActivity(intent);
-                            }
-                        });
-                    }
-                });
+            mViewModel.baseRespEntryLiveData().observe(this, new Observer<BaseRespEntry<ArrayList<NewsEntity>>>() {
+                @Override
+                public void onChanged(BaseRespEntry<ArrayList<NewsEntity>> arrayListBaseRespEntry) {
+                    ArrayList<NewsEntity> data = arrayListBaseRespEntry.getData();
+                    newsAdapter = new NewsAdapter(data);
+                    mBinding.rv.setAdapter(newsAdapter);
+                    newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                            Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                            intent.putExtra("newscode",data.get(position).getNewscode());
+                            startActivity(intent);
+                        }
+                    });
+                }
+            });
 
-        mBinding.pull.setRefreshListener(new BaseRefreshListener() {
-            @Override
-            public void refresh() {
-                mBinding.pull.finishRefresh();
-            }
 
-            @Override
-            public void loadMore() {
-                mBinding.pull.finishLoadMore();
-            }
-        });
+
+//        mBinding.pull.setRefreshListener(new BaseRefreshListener() {
+//            @Override
+//            public void refresh() {
+//                mBinding.pull.finishRefresh();
+//            }
+//
+//            @Override
+//            public void loadMore() {
+//                mBinding.pull.finishLoadMore();
+//            }
+//        });
 
     }
 

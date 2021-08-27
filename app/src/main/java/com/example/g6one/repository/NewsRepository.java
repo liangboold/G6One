@@ -2,10 +2,13 @@ package com.example.g6one.repository;
 
 import androidx.lifecycle.LiveData;
 
+import com.bw.net.protocol.BaseRespEntry;
 import com.example.g6one.bean.NewsEntity;
 import com.example.g6one.model.NewsModel;
 import com.example.mvvm_lib.model.Model;
 import com.example.mvvm_lib.repository.BaseRepository;
+
+import java.util.ArrayList;
 
 /**
  * @package:com.example.g6one.repository
@@ -18,8 +21,8 @@ public class NewsRepository extends BaseRepository {
     @Model
     NewsModel newsModel;
 
-    public LiveData<NewsEntity>news(NewsEntity newsEntity){
-        return newsModel.news(newsEntity);
+    public LiveData<BaseRespEntry<ArrayList<NewsEntity>>> news(){
+        return newsModel.news();
     }
 
 }

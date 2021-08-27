@@ -4,8 +4,13 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.blankj.utilcode.util.ThreadUtils;
+import com.bw.net.RetrofitFactory;
+import com.bw.net.protocol.BaseRespEntry;
+import com.example.g6one.Api;
 import com.example.g6one.bean.NewsEntity;
 import com.example.mvvm_lib.model.IModel;
+
+import java.util.ArrayList;
 
 /**
  * @package:com.example.g6one.model
@@ -17,14 +22,9 @@ import com.example.mvvm_lib.model.IModel;
 public class NewsModel implements IModel {
     MutableLiveData<NewsEntity> mutableLiveData = new MutableLiveData<>();
 
-    public LiveData<NewsEntity>news(NewsEntity newsEntity){
-        if(ThreadUtils.isMainThread()){
-            mutableLiveData.setValue(newsEntity);
-        }else{
-            mutableLiveData.postValue(newsEntity);
-        }
-        return mutableLiveData;
-
+    public LiveData<BaseRespEntry<ArrayList<NewsEntity>>> news(){
+        LiveData<BaseRespEntry<ArrayList<NewsEntity>>> news = RetrofitFactory.getRetrofitFactory().createRetrofit().create(Api.class).getNews(1, 12, 10);
+        return news;
     }
 
 

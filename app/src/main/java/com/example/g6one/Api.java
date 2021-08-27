@@ -24,10 +24,10 @@ import retrofit2.http.Query;
  */
 public interface Api {
     @GET("api/NewsType/getAllTypes")
-    LiveData<BaseRespEntry<ArrayList<TypeBean.DataBean>>> getType();
+    LiveData<BaseRespEntry<ArrayList<TypeBean>>> getType();
 
     @GET("api/News/getNews")
-    LiveData<BaseRespEntry<ArrayList<NewsEntity.DataBean>>> getNews(@Query("newstype")int newstype,@Query("pagenum")int pagenum,@Query("pagesize")int pagesize);
+    LiveData<BaseRespEntry<ArrayList<NewsEntity>>> getNews(@Query("newstype")int newstype,@Query("pagenum")int pagenum,@Query("pagesize")int pagesize);
 
     @GET("api/NewsDetail/getNewsDetail")
     LiveData<BaseRespEntry<ArrayList<NewsDetailEntity.DataBean>>> getNewsDetail(@Query("newscode")String newscode);

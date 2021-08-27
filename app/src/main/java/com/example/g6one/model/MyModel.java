@@ -2,10 +2,16 @@ package com.example.g6one.model;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.blankj.utilcode.util.ThreadUtils;
+import com.bw.net.RetrofitFactory;
+import com.bw.net.protocol.BaseRespEntry;
+import com.example.g6one.Api;
 import com.example.g6one.bean.TypeBean;
 import com.example.mvvm_lib.model.IModel;
+
+import java.util.ArrayList;
 
 /*
  * @ClassName MyModel
@@ -17,12 +23,8 @@ import com.example.mvvm_lib.model.IModel;
 public class MyModel implements IModel {
     MutableLiveData<TypeBean> mutableLiveData = new MutableLiveData<>();
 
-    public LiveData<TypeBean> Type(TypeBean typeBean){
-        if (ThreadUtils.isMainThread()){
-            mutableLiveData.setValue(typeBean);
-        }else {
-            mutableLiveData.postValue(typeBean);
-        }
-        return mutableLiveData;
+    public LiveData<BaseRespEntry<ArrayList<TypeBean>>> Type(){
+        LiveData<BaseRespEntry<ArrayList<TypeBean>>> type = RetrofitFactory.getRetrofitFactory().createRetrofit().create(Api.class).getType();
+        return type;
     }
 }

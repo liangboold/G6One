@@ -1,13 +1,17 @@
 package com.example.g6one.viewmodel;
 
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.blankj.utilcode.util.ThreadUtils;
+import com.bw.net.protocol.BaseRespEntry;
 import com.example.g6one.bean.TypeBean;
 import com.example.g6one.repository.MyRepository;
 import com.example.mvvm_lib.repository.BaseRepository;
 import com.example.mvvm_lib.viewmodel.BaseViewModel;
+
+import java.util.ArrayList;
 
 /*
  * @ClassName MyViewModel
@@ -34,4 +38,7 @@ public class MyViewModel extends BaseViewModel<MyRepository> {
     }
 
 
+    public LiveData<BaseRespEntry<ArrayList<TypeBean>>> baseRespEntryLiveData(){
+        return mRepository.Type();
+    }
 }

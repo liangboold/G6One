@@ -10,22 +10,16 @@ import java.io.Serializable;
  * @Version 1.0
  */
 public class NewsTypeBean implements Serializable {
-    private TypeBean.DataBean dataBean;
-    private boolean ischecked;
-
-    @Override
-    public String toString() {
-        return "NewsTypeBean{" +
-                "dataBean=" + dataBean +
-                ", ischecked=" + ischecked +
-                '}';
+    public NewsTypeBean(TypeBean dataBean, boolean ischecked) {
+        this.dataBean = dataBean;
+        this.ischecked = ischecked;
     }
 
-    public TypeBean.DataBean getDataBean() {
+    public TypeBean getDataBean() {
         return dataBean;
     }
 
-    public void setDataBean(TypeBean.DataBean dataBean) {
+    public void setDataBean(TypeBean dataBean) {
         this.dataBean = dataBean;
     }
 
@@ -37,8 +31,16 @@ public class NewsTypeBean implements Serializable {
         this.ischecked = ischecked;
     }
 
-    public NewsTypeBean(TypeBean.DataBean dataBean, boolean ischecked) {
-        this.dataBean = dataBean;
-        this.ischecked = ischecked;
+    private TypeBean dataBean;
+    private boolean ischecked;
+
+    @Override
+    public String toString() {
+        return "NewsTypeBean{" +
+                "dataBean=" + dataBean +
+                ", ischecked=" + ischecked +
+                '}';
     }
+
+
 }

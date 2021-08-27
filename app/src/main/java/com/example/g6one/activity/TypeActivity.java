@@ -76,35 +76,35 @@ public class TypeActivity extends BaseMVVMActivity<MyViewModel, ActivityMainBind
     }
 
     private void initData() {
-        RetrofitFactory.getRetrofitFactory().createRetrofit().create(Api.class)
-                .getType()
-                .observe(this, new Observer<BaseRespEntry<ArrayList<TypeBean.DataBean>>>() {
-                    @Override
-                    public void onChanged(BaseRespEntry<ArrayList<TypeBean.DataBean>> arrayListBaseRespEntry) {
-                        ArrayList<TypeBean.DataBean> arraylist = arrayListBaseRespEntry.getData();
-                        for (int i = 0; i < arraylist.size(); i++) {
-                            Gson gson = new Gson();
-                            TypeBean.DataBean typeBean = gson.fromJson(String.valueOf(arraylist.get(i)), TypeBean.DataBean.class);
-                            data.add(new NewsTypeBean(typeBean,false));
-                        }
 
-                        NewsTypeAdapter newsTypeAdapter = new NewsTypeAdapter(data);
-                        newsType.setAdapter(newsTypeAdapter);
-                        newsTypeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                                if (data.get(position).isIschecked()){
-                                    data.get(position).setIschecked(false);
-                                    list.remove(data.get(position).getDataBean().getTypename());
-                                }else {
-                                    data.get(position).setIschecked(true);
-                                    list.add(data.get(position).getDataBean().getTypename());
-                                }
-                                newsTypeAdapter.notifyItemChanged(position);
-                            }
-                        });
+        mViewModel.baseRespEntryLiveData().observe(this, new Observer<BaseRespEntry<ArrayList<TypeBean>>>() {
+            @Override
+            public void onChanged(BaseRespEntry<ArrayList<TypeBean>> arrayListBaseRespEntry) {
+
+                ArrayList<TypeBean> arraylist = arrayListBaseRespEntry.getData();
+                for (TypeBean typeBean : arraylist) {
+                    data.add(new NewsTypeBean(typeBean,false));
+                }
+
+                NewsTypeAdapter newsTypeAdapter = new NewsTypeAdapter(data);
+                newsType.setAdapter(newsTypeAdapter);
+                newsTypeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        if (data.get(position).isIschecked()){
+                            data.get(position).setIschecked(false);
+                            list.remove(data.get(position).getDataBean().getTypename());
+                        }else {
+                            data.get(position).setIschecked(true);
+                            list.add(data.get(position).getDataBean().getTypename());
+                        }
+                        newsTypeAdapter.notifyItemChanged(position);
                     }
                 });
+            }
+        });
+
+
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
