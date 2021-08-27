@@ -30,6 +30,8 @@ import com.example.g6one.databinding.Newsfragment;
 import com.example.g6one.viewmodel.NewsViewModel;
 import com.example.mvvm_lib.view.BaseMVVMFragment;
 import com.google.gson.Gson;
+import com.jwenfeng.library.pulltorefresh.BaseRefreshListener;
+import com.jwenfeng.library.pulltorefresh.PullToRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,6 +39,7 @@ import java.util.List;
 
 public class NewsFragment extends BaseMVVMFragment<NewsViewModel, Newsfragment> {
     private NewsAdapter newsAdapter;
+
     @Override
     protected void initEvent() {
         initData();
@@ -85,10 +88,21 @@ public class NewsFragment extends BaseMVVMFragment<NewsViewModel, Newsfragment> 
                     }
                 });
 
+        mBinding.pull.setRefreshListener(new BaseRefreshListener() {
+            @Override
+            public void refresh() {
+                mBinding.pull.finishRefresh();
+            }
+
+            @Override
+            public void loadMore() {
+                mBinding.pull.finishLoadMore();
+            }
+        });
+
     }
 
     private void initView() {
         mBinding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        mBinding.rv.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
     }
 }
