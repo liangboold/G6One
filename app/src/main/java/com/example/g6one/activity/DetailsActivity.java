@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -67,6 +68,8 @@ public class DetailsActivity extends BaseMVVMActivity<MyViewModel, Detailsactivi
                         NewsDetailEntity newsDetailEntity = JSON.parseObject(s, NewsDetailEntity.class);
                         data = newsDetailEntity.getData();
                         System.out.println(data);
+                        mBinding.loading.setVisibility(View.GONE);
+                        mBinding.view.setVisibility(View.VISIBLE);
                         mBinding.tbsWvMain.loadUrl(data.getUrl());
                         mBinding.titlexiang.setText(data.getTitle());
                         mBinding.timexiang.setText(data.getPublishtime());

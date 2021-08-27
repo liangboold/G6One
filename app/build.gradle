@@ -35,6 +35,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     implementation files('libs\\accs_sdk_aranger-1.0.6.jar')
     implementation files('libs\\accs_sdk_taobao-3.4.2.7-umeng.jar')
     implementation files('libs\\alicloud-android-beacon-no-net-1.0.5.jar')

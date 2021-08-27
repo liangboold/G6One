@@ -7,10 +7,36 @@
             type="com.example.g6one.activity.DetailsActivity" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/loading"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.github.ybq.android.spinkit.SpinKitView
+                style="@style/SpinKitView.Large.Circle"
+                android:layout_centerInParent="true"
+                app:SpinKit_Color="#227EBA"
+                android:layout_width="200dp"
+                android:layout_height="200dp" />
+            <TextView
+                android:id="@+id/tv"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="loading...."/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -142,5 +168,9 @@
                 android:layout_weight="1"
                 android:src="@drawable/a444"></ImageView>
         </LinearLayout>
-    </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
 </layout>
