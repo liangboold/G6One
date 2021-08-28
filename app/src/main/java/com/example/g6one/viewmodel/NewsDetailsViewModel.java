@@ -36,7 +36,7 @@ public class NewsDetailsViewModel extends BaseViewModel<NewsDetailsRepository> {
     protected NewsDetailsRepository createRepository() {
         return new NewsDetailsRepository();
     }
-    public LiveData<BaseRespEntry<ArrayList<NewsDetailEntity>>> baseRespEntryLiveData(String newscode){
+    public LiveData<BaseRespEntry<NewsDetailEntity>> baseRespEntryLiveData(String newscode){
         return mRepository.newsDetails(newscode);
     }
 }

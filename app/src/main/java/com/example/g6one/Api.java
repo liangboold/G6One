@@ -30,6 +30,6 @@ public interface Api {
     LiveData<BaseRespEntry<ArrayList<NewsEntity>>> getNews(@Query("newstype")int newstype,@Query("pagenum")int pagenum,@Query("pagesize")int pagesize);
 
     @GET("api/NewsDetail/getNewsDetail")
-    LiveData<BaseRespEntry<ArrayList<NewsDetailEntity>>> getNewsDetail(@Query("newscode")String newscode);
+    LiveData<BaseRespEntry<NewsDetailEntity>> getNewsDetail(@Query("newscode")String newscode);
 
 }

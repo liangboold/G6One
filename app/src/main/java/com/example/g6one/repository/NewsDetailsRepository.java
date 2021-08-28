@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class NewsDetailsRepository extends BaseRepository {
     @Model
     NewsDetailsModel newsDetailsModel;
-    public LiveData<BaseRespEntry<ArrayList<NewsDetailEntity>>>newsDetails(String newscode){
+    public LiveData<BaseRespEntry<NewsDetailEntity>>newsDetails(String newscode){
         return newsDetailsModel.newsDetails(newscode);
     }
 }

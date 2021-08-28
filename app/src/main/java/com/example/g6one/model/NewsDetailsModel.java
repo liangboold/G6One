@@ -21,8 +21,8 @@ import java.util.ArrayList;
 public class NewsDetailsModel implements IModel {
     MutableLiveData<NewsDetailEntity>mutableLiveData = new MutableLiveData<>();
 
-    public LiveData<BaseRespEntry<ArrayList<NewsDetailEntity>>>newsDetails(String newscode){
-        LiveData<BaseRespEntry<ArrayList<NewsDetailEntity>>> newsDetail = RetrofitFactory.getRetrofitFactory().createRetrofit().create(Api.class).getNewsDetail(newscode);
+    public LiveData<BaseRespEntry<NewsDetailEntity>>newsDetails(String newscode){
+        LiveData<BaseRespEntry<NewsDetailEntity>> newsDetail = RetrofitFactory.getRetrofitFactory().createRetrofit().create(Api.class).getNewsDetail(newscode);
         return newsDetail;
     }
 }

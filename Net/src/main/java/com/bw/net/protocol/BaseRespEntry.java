@@ -12,6 +12,15 @@ public class BaseRespEntry<T> {
     private T data;
     private String msg;
 
+    @Override
+    public String toString() {
+        return "BaseRespEntry{" +
+                "code=" + code +
+                ", data=" + data +
+                ", msg='" + msg + '\'' +
+                '}';
+    }
+
     public BaseRespEntry() {
     }
 

@@ -20,7 +20,9 @@ import com.example.g6one.Api;
 import com.example.g6one.BR;
 import com.example.g6one.R;
 import com.example.g6one.bean.NewsDetailEntity;
+import com.example.g6one.bean.TypeBean;
 import com.example.g6one.databinding.Detailsactivity;
+import com.example.g6one.viewmodel.NewsDetailsViewModel;
 import com.example.g6one.viewmodel.TypeViewModel;
 import com.example.mvvm_lib.view.BaseMVVMActivity;
 
@@ -30,7 +32,7 @@ import com.tencent.smtt.sdk.WebViewClient;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DetailsActivity extends BaseMVVMActivity<TypeViewModel, Detailsactivity> {
+public class DetailsActivity extends BaseMVVMActivity<NewsDetailsViewModel, Detailsactivity> {
 
     private String newscode;
     private TextView actDetailHeadTitle;
@@ -38,8 +40,8 @@ public class DetailsActivity extends BaseMVVMActivity<TypeViewModel, Detailsacti
     private RelativeLayout headLayout;
 
     @Override
-    protected TypeViewModel createViewModel() {
-        return new TypeViewModel(this);
+    protected NewsDetailsViewModel createViewModel() {
+        return new NewsDetailsViewModel(this);
     }
 
     @Override
@@ -64,20 +66,17 @@ public class DetailsActivity extends BaseMVVMActivity<TypeViewModel, Detailsacti
     }
 
     private void requestData() {
-        RetrofitFactory.getRetrofitFactory().createRetrofit().create(Api.class)
-                .getNewsDetail(newscode)
-                .observe(this, new Observer<BaseRespEntry<ArrayList<NewsDetailEntity>>>() {
-                    @Override
-                    public void onChanged(BaseRespEntry<ArrayList<NewsDetailEntity>> arrayListBaseRespEntry) {
-                        ArrayList<NewsDetailEntity> data = arrayListBaseRespEntry.getData();
-                        System.out.println(data);
-                        mBinding.loading.setVisibility(View.GONE);
-                        mBinding.view.setVisibility(View.VISIBLE);
-                        mBinding.tbsWvMain.loadUrl(data.get(0).getUrl());
-                        mBinding.titlexiang.setText(data.get(0).getTitle());
-                        mBinding.timexiang.setText(data.get(0).getPublishtime());
-                    }
-                });
+        mViewModel.baseRespEntryLiveData(newscode).observe(this, new Observer<BaseRespEntry<NewsDetailEntity>>() {
+            @Override
+            public void onChanged(BaseRespEntry<NewsDetailEntity> arrayListBaseRespEntry) {
+                NewsDetailEntity data = arrayListBaseRespEntry.getData();
+                mBinding.loading.setVisibility(View.GONE);
+                mBinding.view.setVisibility(View.VISIBLE);
+                mBinding.tbsWvMain.loadUrl(data.getUrl());
+                mBinding.titlexiang.setText(data.getTitle());
+                mBinding.timexiang.setText(data.getPublishtime());
+            }
+        });
 
     }
 
