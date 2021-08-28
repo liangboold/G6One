@@ -3,14 +3,11 @@ package com.example.g6one.activity;
 
 import androidx.lifecycle.Observer;
 
-import android.os.Bundle;
 import android.util.Log;
 
 import android.view.MotionEvent;
 
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -24,7 +21,7 @@ import com.example.g6one.BR;
 import com.example.g6one.R;
 import com.example.g6one.bean.NewsDetailEntity;
 import com.example.g6one.databinding.Detailsactivity;
-import com.example.g6one.viewmodel.MyViewModel;
+import com.example.g6one.viewmodel.TypeViewModel;
 import com.example.mvvm_lib.view.BaseMVVMActivity;
 
 import com.tencent.smtt.sdk.WebView;
@@ -33,17 +30,16 @@ import com.tencent.smtt.sdk.WebViewClient;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DetailsActivity extends BaseMVVMActivity<MyViewModel, Detailsactivity> {
+public class DetailsActivity extends BaseMVVMActivity<TypeViewModel, Detailsactivity> {
 
     private String newscode;
-    private NewsDetailEntity.DataBean data;
     private TextView actDetailHeadTitle;
     private ScrollView actDetailScrollView;
     private RelativeLayout headLayout;
 
     @Override
-    protected MyViewModel createViewModel() {
-        return new MyViewModel(this);
+    protected TypeViewModel createViewModel() {
+        return new TypeViewModel(this);
     }
 
     @Override
@@ -70,18 +66,16 @@ public class DetailsActivity extends BaseMVVMActivity<MyViewModel, Detailsactivi
     private void requestData() {
         RetrofitFactory.getRetrofitFactory().createRetrofit().create(Api.class)
                 .getNewsDetail(newscode)
-                .observe(this, new Observer<BaseRespEntry<ArrayList<NewsDetailEntity.DataBean>>>() {
+                .observe(this, new Observer<BaseRespEntry<ArrayList<NewsDetailEntity>>>() {
                     @Override
-                    public void onChanged(BaseRespEntry<ArrayList<NewsDetailEntity.DataBean>> arrayListBaseRespEntry) {
-                        String s = JSON.toJSONString(arrayListBaseRespEntry);
-                        NewsDetailEntity newsDetailEntity = JSON.parseObject(s, NewsDetailEntity.class);
-                        data = newsDetailEntity.getData();
+                    public void onChanged(BaseRespEntry<ArrayList<NewsDetailEntity>> arrayListBaseRespEntry) {
+                        ArrayList<NewsDetailEntity> data = arrayListBaseRespEntry.getData();
                         System.out.println(data);
                         mBinding.loading.setVisibility(View.GONE);
                         mBinding.view.setVisibility(View.VISIBLE);
-                        mBinding.tbsWvMain.loadUrl(data.getUrl());
-                        mBinding.titlexiang.setText(data.getTitle());
-                        mBinding.timexiang.setText(data.getPublishtime());
+                        mBinding.tbsWvMain.loadUrl(data.get(0).getUrl());
+                        mBinding.titlexiang.setText(data.get(0).getTitle());
+                        mBinding.timexiang.setText(data.get(0).getPublishtime());
                     }
                 });
 

@@ -1,6 +1,6 @@
+include ':pulltorefresh'
 rootProject.name = "G6One"
 include ':app'
 include ':MVVM_lib'
 include ':Net'
 include ':flowlayout-libs'
-include ':pulltorefresh'

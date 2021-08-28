@@ -30,6 +30,7 @@ import com.example.g6one.databinding.Newsfragment;
 import com.example.g6one.viewmodel.NewsViewModel;
 import com.example.mvvm_lib.view.BaseMVVMFragment;
 import com.google.gson.Gson;
+import com.jwenfeng.library.pulltorefresh.BaseRefreshListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,17 +84,17 @@ public class NewsFragment extends BaseMVVMFragment<NewsViewModel, Newsfragment> 
 
 
 
-//        mBinding.pull.setRefreshListener(new BaseRefreshListener() {
-//            @Override
-//            public void refresh() {
-//                mBinding.pull.finishRefresh();
-//            }
-//
-//            @Override
-//            public void loadMore() {
-//                mBinding.pull.finishLoadMore();
-//            }
-//        });
+        mBinding.pull.setRefreshListener(new BaseRefreshListener() {
+            @Override
+            public void refresh() {
+                mBinding.pull.finishRefresh();
+            }
+
+            @Override
+            public void loadMore() {
+                mBinding.pull.finishLoadMore();
+            }
+        });
 
     }
 

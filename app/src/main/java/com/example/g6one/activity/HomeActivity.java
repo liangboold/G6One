@@ -5,10 +5,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.View;
-
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -20,22 +16,22 @@ import com.example.g6one.fragment.HomePageFragment;
 import com.example.g6one.fragment.MyFragment;
 import com.example.g6one.fragment.VideoFragment;
 import com.example.g6one.fragment.WTouTiaoFragment;
-import com.example.g6one.viewmodel.MyViewModel;
+import com.example.g6one.viewmodel.TypeViewModel;
 import com.example.mvvm_lib.view.BaseMVVMActivity;
 import com.flyco.tablayout.listener.CustomTabEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class HomeActivity extends BaseMVVMActivity<MyViewModel, Homeactivity> implements BottomNavigationBar.OnTabSelectedListener{
+public class HomeActivity extends BaseMVVMActivity<TypeViewModel, Homeactivity> implements BottomNavigationBar.OnTabSelectedListener{
 
     private ArrayList<Fragment> list = new ArrayList<>();
     private ArrayList<CustomTabEntity> tabEntitys = new ArrayList<>();
 
 
     @Override
-    protected MyViewModel createViewModel() {
-        return new MyViewModel(this);
+    protected TypeViewModel createViewModel() {
+        return new TypeViewModel(this);
     }
 
     @Override

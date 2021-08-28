@@ -14,15 +14,15 @@ import com.example.mvvm_lib.viewmodel.BaseViewModel;
 import java.util.ArrayList;
 
 /*
- * @ClassName MyViewModel
+ * @ClassName TypeViewModel
  * @Description TODO
  * @Author 康泽林
  * @Date 2021/8/22 18:36
  * @Version 1.0
  */
-public class MyViewModel extends BaseViewModel<MyRepository> {
+public class TypeViewModel extends BaseViewModel<MyRepository> {
     public MutableLiveData<TypeBean> mutableLiveData = new MutableLiveData<>();
-    public MyViewModel(LifecycleOwner owner) {
+    public TypeViewModel(LifecycleOwner owner) {
         super(owner);
         TypeBean typeBean = new TypeBean();
         if (ThreadUtils.isMainThread()){

@@ -1,57 +1,41 @@
 package com.example.g6one.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.bw.net.RetrofitFactory;
 import com.bw.net.protocol.BaseRespEntry;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.example.g6one.Api;
 import com.example.g6one.BR;
 import com.example.g6one.bean.NewsTypeBean;
 import com.example.g6one.R;
 import com.example.g6one.bean.TypeBean;
 
 import com.example.g6one.databinding.ActivityMainBinding;
-import com.example.g6one.viewmodel.MyViewModel;
+import com.example.g6one.viewmodel.TypeViewModel;
 import com.example.mvvm_lib.view.BaseMVVMActivity;
-import com.example.mvvm_lib.viewmodel.BaseViewModel;
-import com.google.gson.Gson;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-
-public class TypeActivity extends BaseMVVMActivity<MyViewModel, ActivityMainBinding> {
+public class TypeActivity extends BaseMVVMActivity<TypeViewModel, ActivityMainBinding> {
     ArrayList<NewsTypeBean> data = new ArrayList<>();
     ArrayList<String> list = new ArrayList<>();
     private RecyclerView newsType;
     private Button next;
 
     @Override
-    protected MyViewModel createViewModel() {
-        return new MyViewModel(this);
+    protected TypeViewModel createViewModel() {
+        return new TypeViewModel(this);
     }
 
     @Override
