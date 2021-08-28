@@ -20,22 +20,22 @@ import com.example.g6one.R;
 import com.example.g6one.bean.TypeBean;
 
 import com.example.g6one.databinding.ActivityMainBinding;
-import com.example.g6one.viewmodel.TypeViewModel;
+import com.example.g6one.viewmodel.NewsTypeViewModel;
 import com.example.mvvm_lib.view.BaseMVVMActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class TypeActivity extends BaseMVVMActivity<TypeViewModel, ActivityMainBinding> {
+public class TypeActivity extends BaseMVVMActivity<NewsTypeViewModel, ActivityMainBinding> {
     ArrayList<NewsTypeBean> data = new ArrayList<>();
-    ArrayList<String> list = new ArrayList<>();
+    ArrayList<TypeBean> list = new ArrayList<>();
     private RecyclerView newsType;
     private Button next;
 
     @Override
-    protected TypeViewModel createViewModel() {
-        return new TypeViewModel(this);
+    protected NewsTypeViewModel createViewModel() {
+        return new NewsTypeViewModel(this);
     }
 
     @Override
@@ -77,10 +77,10 @@ public class TypeActivity extends BaseMVVMActivity<TypeViewModel, ActivityMainBi
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                         if (data.get(position).isIschecked()){
                             data.get(position).setIschecked(false);
-                            list.remove(data.get(position).getDataBean().getTypename());
+                            list.remove(data.get(position).getDataBean());
                         }else {
                             data.get(position).setIschecked(true);
-                            list.add(data.get(position).getDataBean().getTypename());
+                            list.add(data.get(position).getDataBean());
                         }
                         newsTypeAdapter.notifyItemChanged(position);
                     }
@@ -93,7 +93,7 @@ public class TypeActivity extends BaseMVVMActivity<TypeViewModel, ActivityMainBi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TypeActivity.this, HomeActivity.class);
-                intent.putStringArrayListExtra("list",list);
+                intent.putParcelableArrayListExtra("list",list);
                 startActivity(intent);
             }
         });

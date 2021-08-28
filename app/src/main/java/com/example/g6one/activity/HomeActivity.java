@@ -16,22 +16,22 @@ import com.example.g6one.fragment.HomePageFragment;
 import com.example.g6one.fragment.MyFragment;
 import com.example.g6one.fragment.VideoFragment;
 import com.example.g6one.fragment.WTouTiaoFragment;
-import com.example.g6one.viewmodel.TypeViewModel;
+import com.example.g6one.viewmodel.NewsTypeViewModel;
 import com.example.mvvm_lib.view.BaseMVVMActivity;
 import com.flyco.tablayout.listener.CustomTabEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class HomeActivity extends BaseMVVMActivity<TypeViewModel, Homeactivity> implements BottomNavigationBar.OnTabSelectedListener{
+public class HomeActivity extends BaseMVVMActivity<NewsTypeViewModel, Homeactivity> implements BottomNavigationBar.OnTabSelectedListener{
 
     private ArrayList<Fragment> list = new ArrayList<>();
     private ArrayList<CustomTabEntity> tabEntitys = new ArrayList<>();
 
 
     @Override
-    protected TypeViewModel createViewModel() {
-        return new TypeViewModel(this);
+    protected NewsTypeViewModel createViewModel() {
+        return new NewsTypeViewModel(this);
     }
 
     @Override

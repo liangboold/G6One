@@ -17,6 +17,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.example.g6one.BR;
 import com.example.g6one.R;
 import com.example.g6one.activity.MainActivityQuerys;
+import com.example.g6one.bean.NewsTypeBean;
+import com.example.g6one.bean.TypeBean;
 import com.example.g6one.databinding.HomeFragment;
 import com.example.g6one.viewmodel.NewsViewModel;
 import com.example.mvvm_lib.view.BaseMVVMFragment;
@@ -31,10 +33,12 @@ import java.util.HashMap;
 
 
 public class HomePageFragment extends BaseMVVMFragment<NewsViewModel, HomeFragment> {
+
     ArrayList<String> strings = new ArrayList<>();
     ArrayList<Fragment> fragments = new ArrayList<>();
     Intent intent;
-    ArrayList<String> list;
+    ArrayList<TypeBean> list;
+    public static int typeid;
     private TextView tabtext;
 
 
@@ -57,6 +61,7 @@ public class HomePageFragment extends BaseMVVMFragment<NewsViewModel, HomeFragme
                 tabtext.setText(tab.getText());
                 tabtext.setTypeface(Typeface.DEFAULT,Typeface.BOLD);
                 tab.setCustomView(tabtext);
+                typeid = list.get(tab.getPosition()).getId();
             }
 
             @Override
@@ -125,9 +130,9 @@ public class HomePageFragment extends BaseMVVMFragment<NewsViewModel, HomeFragme
     private void initData() {
 
 
-        for (String s : list) {
+        for (TypeBean s : list) {
             fragments.add(new NewsFragment());
-            strings.add(s);
+            strings.add(s.getTypename());
         }
         mBinding.tabvp.setAdapter(new TabVp(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
         mBinding.titletab.setupWithViewPager(mBinding.tabvp);
@@ -145,8 +150,9 @@ public class HomePageFragment extends BaseMVVMFragment<NewsViewModel, HomeFragme
 
     private void initView() {
         intent = getActivity().getIntent();
-        list = intent.getStringArrayListExtra("list");
+        list = intent.getParcelableArrayListExtra("list");
         tabtext = new TextView(getActivity());
+        typeid = list.get(0).getId();
     }
 
     private class TabVp extends FragmentPagerAdapter {

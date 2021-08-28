@@ -36,7 +36,7 @@ public class NewsViewModel extends BaseViewModel<NewsRepository> {
         return new NewsRepository();
     }
 
-    public LiveData<BaseRespEntry<ArrayList<NewsEntity>>> baseRespEntryLiveData(){
-        return mRepository.news();
+    public LiveData<BaseRespEntry<ArrayList<NewsEntity>>> baseRespEntryLiveData(int newstype){
+        return mRepository.news(newstype);
     }
 }

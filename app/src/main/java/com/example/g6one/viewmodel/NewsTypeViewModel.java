@@ -7,8 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.blankj.utilcode.util.ThreadUtils;
 import com.bw.net.protocol.BaseRespEntry;
 import com.example.g6one.bean.TypeBean;
-import com.example.g6one.repository.MyRepository;
-import com.example.mvvm_lib.repository.BaseRepository;
+import com.example.g6one.repository.NewsTypeRepository;
 import com.example.mvvm_lib.viewmodel.BaseViewModel;
 
 import java.util.ArrayList;
@@ -20,9 +19,9 @@ import java.util.ArrayList;
  * @Date 2021/8/22 18:36
  * @Version 1.0
  */
-public class TypeViewModel extends BaseViewModel<MyRepository> {
+public class NewsTypeViewModel extends BaseViewModel<NewsTypeRepository> {
     public MutableLiveData<TypeBean> mutableLiveData = new MutableLiveData<>();
-    public TypeViewModel(LifecycleOwner owner) {
+    public NewsTypeViewModel(LifecycleOwner owner) {
         super(owner);
         TypeBean typeBean = new TypeBean();
         if (ThreadUtils.isMainThread()){
@@ -33,8 +32,8 @@ public class TypeViewModel extends BaseViewModel<MyRepository> {
     }
 
     @Override
-    protected MyRepository createRepository() {
-        return new MyRepository();
+    protected NewsTypeRepository createRepository() {
+        return new NewsTypeRepository();
     }
 
 

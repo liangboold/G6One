@@ -6,7 +6,7 @@
     <data>
         <variable
             name="MyViewModel"
-            type="com.example.g6one.viewmodel.TypeViewModel" />
+            type="com.example.g6one.viewmodel.NewsTypeViewModel" />
     </data>
 
     <RelativeLayout

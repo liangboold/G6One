@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @Date 2021/8/19 18:57
  * @Version 1.0
  */
-public class NewsTypeBean implements Serializable {
+public class NewsTypeBean {
     public NewsTypeBean(TypeBean dataBean, boolean ischecked) {
         this.dataBean = dataBean;
         this.ischecked = ischecked;

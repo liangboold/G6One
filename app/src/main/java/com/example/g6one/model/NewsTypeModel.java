@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * @Date 2021/8/22 18:42
  * @Version 1.0
  */
-public class MyModel implements IModel {
+public class NewsTypeModel implements IModel {
     MutableLiveData<TypeBean> mutableLiveData = new MutableLiveData<>();
 
     public LiveData<BaseRespEntry<ArrayList<TypeBean>>> Type(){
