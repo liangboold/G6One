@@ -51,7 +51,6 @@ dependencies {
     implementation files('libs\\umeng-shareboard-widget-6.9.6.jar')
     implementation files('libs\\umeng-sharetool-6.9.6.jar')
     implementation files('libs\\utdid4all-1.5.2.1-proguard.jar')
-    implementation project(path: ':pulltorefresh')
     compile  'com.umeng.umsdk:common:9.4.0'//必选
     compile  'com.umeng.umsdk:asms:1.2.3'//必选
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -78,6 +77,8 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.lzy.net:okserver:2.0.5'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0' //上拉下拉
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'  //没有使用特殊Header，可以不加这行
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'//万能适配器
     implementation 'jp.wasabeef:recyclerview-animators:4.0.2'       //recyclerview动画
     implementation 'com.yanyusong.y_divideritemdecoration:y_divideritemdecoration:2.0'//recyclerview间隔线

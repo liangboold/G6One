@@ -1,4 +1,3 @@
-include ':pulltorefresh'
 rootProject.name = "G6One"
 include ':app'
 include ':MVVM_lib'

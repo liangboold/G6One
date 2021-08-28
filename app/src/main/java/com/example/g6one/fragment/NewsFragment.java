@@ -3,6 +3,7 @@ package com.example.g6one.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -30,7 +31,10 @@ import com.example.g6one.databinding.Newsfragment;
 import com.example.g6one.viewmodel.NewsViewModel;
 import com.example.mvvm_lib.view.BaseMVVMFragment;
 import com.google.gson.Gson;
-import com.jwenfeng.library.pulltorefresh.BaseRefreshListener;
+import com.scwang.smartrefresh.header.PhoenixHeader;
+import com.scwang.smartrefresh.header.TaurusHeader;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,19 +87,18 @@ public class NewsFragment extends BaseMVVMFragment<NewsViewModel, Newsfragment> 
             });
 
 
-
-        mBinding.pull.setRefreshListener(new BaseRefreshListener() {
+        mBinding.smart.setRefreshHeader(new TaurusHeader(getActivity()));
+        mBinding.smart.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
-            public void refresh() {
-                mBinding.pull.finishRefresh();
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                mBinding.smart.finishLoadMore();
             }
 
             @Override
-            public void loadMore() {
-                mBinding.pull.finishLoadMore();
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                mBinding.smart.finishRefresh();
             }
         });
-
     }
 
     private void initView() {
