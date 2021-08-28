@@ -31,4 +31,5 @@ public interface Api {
 
     @GET("api/NewsDetail/getNewsDetail")
     LiveData<BaseRespEntry<ArrayList<NewsDetailEntity>>> getNewsDetail(@Query("newscode")String newscode);
+
 }
