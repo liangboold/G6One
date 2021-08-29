@@ -23,7 +23,7 @@ public class NewsModel implements IModel {
     MutableLiveData<NewsEntity> mutableLiveData = new MutableLiveData<>();
 
     public LiveData<BaseRespEntry<ArrayList<NewsEntity>>> news(int newstype,int pagenum){
-        LiveData<BaseRespEntry<ArrayList<NewsEntity>>> news = RetrofitFactory.getRetrofitFactory().createRetrofit().create(Api.class).getNews(newstype, pagenum, 10);
+        LiveData<BaseRespEntry<ArrayList<NewsEntity>>> news = RetrofitFactory.getInstance().createRetrofit().create(Api.class).getNews(newstype, pagenum, 10);
         return news;
     }
 

@@ -22,7 +22,7 @@ public class WeiModel implements IModel {
     MutableLiveData<WeitouEntity> mutableLiveData = new MutableLiveData<>();
 
     public LiveData<BaseRespEntry<ArrayList<WeitouEntity>>>getAttentHeadline(int i){
-        LiveData<BaseRespEntry<ArrayList<WeitouEntity>>> attentHeadline = RetrofitFactory.getRetrofitFactory().createRetrofit().create(Api.class).getAttentHeadline(3);
+        LiveData<BaseRespEntry<ArrayList<WeitouEntity>>> attentHeadline = RetrofitFactory.getInstance().createRetrofit().create(Api.class).getAttentHeadline(3);
         return attentHeadline;
     }
 

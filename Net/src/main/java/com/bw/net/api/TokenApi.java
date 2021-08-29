@@ -16,6 +16,6 @@ import retrofit2.http.POST;
  */
 public interface TokenApi {
     @FormUrlEncoded
-    @POST
+    @POST("token")
     Call<TokenRespEntry>getToken(@Field("grant_type")String grant_type,@Field("username")String username,@Field("password")String password);
 }

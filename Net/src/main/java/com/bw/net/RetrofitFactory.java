@@ -33,7 +33,8 @@ public class RetrofitFactory {
     private Retrofit retrofit;
     private volatile static RetrofitFactory retrofitFactory;
 
-    public static RetrofitFactory getRetrofitFactory() {
+
+    public static RetrofitFactory getInstance() {
         if(retrofitFactory==null){
             synchronized (RetrofitFactory.class){
                 if(retrofitFactory==null){
@@ -98,6 +99,7 @@ public class RetrofitFactory {
                     mToken = token;
                     return restRequest(request,token,chain);
                 }
+                System.out.println(mToken);
                 return response;
             }
         };
