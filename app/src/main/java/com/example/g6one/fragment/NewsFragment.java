@@ -43,6 +43,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class NewsFragment extends BaseMVVMFragment<NewsViewModel, Newsfragment> {
+    private ArrayList<NewsEntity> data = new ArrayList<>();
+    int coumt = 1;
     private NewsAdapter newsAdapter;
     @Override
     protected void initEvent() {
@@ -70,21 +72,26 @@ public class NewsFragment extends BaseMVVMFragment<NewsViewModel, Newsfragment> 
     }
 
 
-    private void requestData() {
-        mViewModel.baseRespEntryLiveData(HomePageFragment.typeid).observe(this, new Observer<BaseRespEntry<ArrayList<NewsEntity>>>() {
+    private void requestData(int count) {
+        mViewModel.baseRespEntryLiveData(HomePageFragment.typeid,count).observe(this, new Observer<BaseRespEntry<ArrayList<NewsEntity>>>() {
             @Override
             public void onChanged(BaseRespEntry<ArrayList<NewsEntity>> arrayListBaseRespEntry) {
-                ArrayList<NewsEntity> data = arrayListBaseRespEntry.getData();
-                newsAdapter = new NewsAdapter(data);
-                mBinding.rv.setAdapter(newsAdapter);
-                newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        Intent intent = new Intent(getActivity(), DetailsActivity.class);
-                        intent.putExtra("newscode",data.get(position).getNewscode());
-                        startActivity(intent);
-                    }
-                });
+                data.addAll(arrayListBaseRespEntry.getData());
+                if (count == 1){
+                    newsAdapter = new NewsAdapter(data);
+                    mBinding.rv.setAdapter(newsAdapter);
+                    newsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                            Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                            intent.putExtra("newscode",data.get(position).getNewscode());
+                            startActivity(intent);
+                        }
+                    });
+                }else {
+                    newsAdapter.notifyDataSetChanged();
+                }
+
             }
         });
     }
@@ -92,7 +99,7 @@ public class NewsFragment extends BaseMVVMFragment<NewsViewModel, Newsfragment> 
     @Override
     public void onResume() {
         super.onResume();
-        requestData();
+        requestData(coumt);
     }
 
 
@@ -103,6 +110,7 @@ public class NewsFragment extends BaseMVVMFragment<NewsViewModel, Newsfragment> 
         mBinding.smart.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                requestData(++coumt);
                 mBinding.smart.finishLoadMore();
             }
 
