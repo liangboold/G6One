@@ -21,8 +21,6 @@ import java.util.ArrayList;
  * @Version 1.0
  */
 public class NewsTypeModel implements IModel {
-    MutableLiveData<TypeBean> mutableLiveData = new MutableLiveData<>();
-
     public LiveData<BaseRespEntry<ArrayList<TypeBean>>> Type(){
         LiveData<BaseRespEntry<ArrayList<TypeBean>>> type = RetrofitFactory.getInstance().createRetrofit().create(Api.class).getType();
         return type;

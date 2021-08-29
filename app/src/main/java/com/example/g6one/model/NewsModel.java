@@ -20,8 +20,6 @@ import java.util.ArrayList;
  * @email:1572651596@qq.com
  */
 public class NewsModel implements IModel {
-    MutableLiveData<NewsEntity> mutableLiveData = new MutableLiveData<>();
-
     public LiveData<BaseRespEntry<ArrayList<NewsEntity>>> news(int newstype,int pagenum){
         LiveData<BaseRespEntry<ArrayList<NewsEntity>>> news = RetrofitFactory.getInstance().createRetrofit().create(Api.class).getNews(newstype, pagenum, 10);
         return news;

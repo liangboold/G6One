@@ -19,8 +19,6 @@ import java.util.ArrayList;
  * @Version 1.0
  */
 public class WeiModel implements IModel {
-    MutableLiveData<WeitouEntity> mutableLiveData = new MutableLiveData<>();
-
     public LiveData<BaseRespEntry<ArrayList<WeitouEntity>>>getAttentHeadline(int i){
         LiveData<BaseRespEntry<ArrayList<WeitouEntity>>> attentHeadline = RetrofitFactory.getInstance().createRetrofit().create(Api.class).getAttentHeadline(3);
         return attentHeadline;
