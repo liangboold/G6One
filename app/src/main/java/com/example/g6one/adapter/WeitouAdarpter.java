@@ -29,10 +29,10 @@ public class WeitouAdarpter extends BaseQuickAdapter<WeitouEntity, BaseViewHolde
     protected void convert(BaseViewHolder helper, WeitouEntity item) {
         helper.setText(R.id.wei_tv,item.getContent());
         helper.setText(R.id.time_wei,item.getCtime());
+            Glide.with(mContext).load(item.getImgs()).into((ImageView) helper.getView(R.id.wei_imone));
+            Glide.with(mContext).load(item.getImgs()).into((ImageView) helper.getView(R.id.wei_imtwo));
+            Glide.with(mContext).load(item.getImgs()).into((ImageView) helper.getView(R.id.wei_imthere));
+            Glide.with(mContext).load(item.getImgs()).into((ImageView) helper.getView(R.id.wei_imfor));
 
-        Glide.with(mContext).load(item.getImgs()).into((ImageView) helper.getView(R.id.wei_imone));
-        Glide.with(mContext).load(item.getImgs()).into((ImageView) helper.getView(R.id.wei_imtwo));
-        Glide.with(mContext).load(item.getImgs()).into((ImageView) helper.getView(R.id.wei_imthere));
-        Glide.with(mContext).load(item.getImgs()).into((ImageView) helper.getView(R.id.wei_imfor));
     }
 }

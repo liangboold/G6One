@@ -12,20 +12,22 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="#BC2A2A"></LinearLayout>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="45dp"
         android:text="微头条"
         android:textStyle="bold"
         android:textColor="#E7DCEE"
         android:gravity="center"
         android:background="#BC2A2A"
-        android:textSize="32dp"
-        ></TextView>
+        android:textSize="21dp"></TextView>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="38dp"
         android:orientation="horizontal"
         android:background="#BC2A2A"
         >
@@ -40,7 +42,7 @@
             android:textStyle="bold"
             android:textColor="#E7DCEE"
             android:gravity="center"
-            android:textSize="32dp"
+            android:textSize="18dp"
             android:id="@+id/Publish"
             android:text="发布"
             ></TextView>
@@ -48,7 +50,6 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:id="@+id/dong_rv"
             ></androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
