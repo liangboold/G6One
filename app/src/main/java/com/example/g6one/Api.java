@@ -8,6 +8,7 @@ import com.bw.net.protocol.BaseRespEntry;
 import com.example.g6one.bean.NewsDetailEntity;
 import com.example.g6one.bean.NewsEntity;
 import com.example.g6one.bean.TypeBean;
+import com.example.g6one.bean.WeitouEntity;
 
 import java.util.ArrayList;
 
@@ -31,5 +32,7 @@ public interface Api {
 
     @GET("api/NewsDetail/getNewsDetail")
     LiveData<BaseRespEntry<NewsDetailEntity>> getNewsDetail(@Query("newscode")String newscode);
+    @GET("api/HeadLine/getAttentHeadline")
+    LiveData<BaseRespEntry<ArrayList<WeitouEntity>>> getAttentHeadline(@Query("userid")int userid);
 
 }
