@@ -15,19 +15,14 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 
-import com.alibaba.fastjson.JSON;
-import com.bw.net.RetrofitFactory;
 import com.bw.net.protocol.BaseRespEntry;
-import com.example.g6one.Api;
 import com.example.g6one.BR;
 import com.example.g6one.R;
 import com.example.g6one.adapter.CommentAdapter;
 import com.example.g6one.bean.MessageEntity;
 import com.example.g6one.bean.NewsDetailEntity;
-import com.example.g6one.bean.TypeBean;
 import com.example.g6one.databinding.Detailsactivity;
 import com.example.g6one.viewmodel.NewsDetailsViewModel;
-import com.example.g6one.viewmodel.TypeViewModel;
 import com.example.mvvm_lib.view.BaseMVVMActivity;
 
 import com.tencent.smtt.sdk.WebView;

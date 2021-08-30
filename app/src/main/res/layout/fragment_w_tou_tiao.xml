@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".fragment.WTouTiaoFragment">
+    >
+    <data>
+        <variable
+            name="wei"
+            type="com.example.g6one.viewmodel.WeiViewModel" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="#BC2A2A"></LinearLayout>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="45dp"
         android:text="微头条"
         android:textStyle="bold"
         android:textColor="#E7DCEE"
         android:gravity="center"
         android:background="#BC2A2A"
-        android:textSize="32dp"
-        ></TextView>
+        android:textSize="21dp"></TextView>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="38dp"
         android:orientation="horizontal"
         android:background="#BC2A2A"
         >
@@ -33,16 +42,15 @@
             android:textStyle="bold"
             android:textColor="#E7DCEE"
             android:gravity="center"
-            android:textSize="32dp"
+            android:textSize="18dp"
             android:id="@+id/Publish"
             android:text="发布"
             ></TextView>
     </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="9"
+            android:layout_height="match_parent"
             android:id="@+id/dong_rv"
             ></androidx.recyclerview.widget.RecyclerView>
-
-</LinearLayout>
+    </LinearLayout>
+</layout>

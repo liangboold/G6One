@@ -21,8 +21,8 @@ public class NewsRepository extends BaseRepository {
     @Model
     NewsModel newsModel;
 
-    public LiveData<BaseRespEntry<ArrayList<NewsEntity>>> news(){
-        return newsModel.news();
+    public LiveData<BaseRespEntry<ArrayList<NewsEntity>>> news(int newstype,int pagenum){
+        return newsModel.news(newstype,pagenum);
     }
 
 }

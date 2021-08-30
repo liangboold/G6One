@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 
 import com.bw.net.protocol.BaseRespEntry;
 import com.example.g6one.bean.TypeBean;
-import com.example.g6one.model.MyModel;
+import com.example.g6one.model.NewsTypeModel;
 import com.example.mvvm_lib.model.Model;
 import com.example.mvvm_lib.repository.BaseRepository;
 
@@ -17,9 +17,9 @@ import java.util.ArrayList;
  * @Date 2021/8/22 18:41
  * @Version 1.0
  */
-public class MyRepository extends BaseRepository {
+public class NewsTypeRepository extends BaseRepository {
     @Model
-    MyModel myModel;
+    NewsTypeModel myModel;
 
     public LiveData<BaseRespEntry<ArrayList<TypeBean>>> Type(){
         return myModel.Type();

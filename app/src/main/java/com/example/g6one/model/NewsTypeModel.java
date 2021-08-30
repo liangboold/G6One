@@ -20,11 +20,9 @@ import java.util.ArrayList;
  * @Date 2021/8/22 18:42
  * @Version 1.0
  */
-public class MyModel implements IModel {
-    MutableLiveData<TypeBean> mutableLiveData = new MutableLiveData<>();
-
+public class NewsTypeModel implements IModel {
     public LiveData<BaseRespEntry<ArrayList<TypeBean>>> Type(){
-        LiveData<BaseRespEntry<ArrayList<TypeBean>>> type = RetrofitFactory.getRetrofitFactory().createRetrofit().create(Api.class).getType();
+        LiveData<BaseRespEntry<ArrayList<TypeBean>>> type = RetrofitFactory.getInstance().createRetrofit().create(Api.class).getType();
         return type;
     }
 }

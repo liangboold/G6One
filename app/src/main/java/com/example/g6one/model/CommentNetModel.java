@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class CommentNetModel implements IModel {
     public LiveData<BaseRespEntry<ArrayList<MessageEntity>>> comment(String newsCode,Integer parentid,Integer userid){
-        LiveData<BaseRespEntry<ArrayList<MessageEntity>>> LiveData = RetrofitFactory.getRetrofitFactory().createRetrofit().create(Api.class).getCommtexs(newsCode, parentid, userid);
+        LiveData<BaseRespEntry<ArrayList<MessageEntity>>> LiveData = RetrofitFactory.getInstance().createRetrofit().create(Api.class).getCommtexs(newsCode, parentid, userid);
 
         return LiveData;
     }
