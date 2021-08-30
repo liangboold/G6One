@@ -1,0 +1,24 @@
+R_DEF: Internal format may change without notice
+local
+attr? view_empty
+attr? view_error
+attr? view_loading
+color grey
+id error_refresh
+id header_arrow
+id header_progress
+id header_tv
+layout layout_empty
+layout layout_error
+layout layout_footer
+layout layout_header
+layout layout_loading
+mipmap ic_arrow_down
+mipmap ic_nowifi
+mipmap ic_warn
+string app_name
+string empty
+string error
+string loading
+string net_error
+styleable PullToRefreshLayout view_error view_empty view_loading

@@ -2,6 +2,8 @@ package com.example.g6one.activity;
 
 
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 
@@ -19,6 +21,8 @@ import com.bw.net.protocol.BaseRespEntry;
 import com.example.g6one.Api;
 import com.example.g6one.BR;
 import com.example.g6one.R;
+import com.example.g6one.adapter.CommentAdapter;
+import com.example.g6one.bean.MessageEntity;
 import com.example.g6one.bean.NewsDetailEntity;
 import com.example.g6one.bean.TypeBean;
 import com.example.g6one.databinding.Detailsactivity;
@@ -31,9 +35,10 @@ import com.tencent.smtt.sdk.WebViewClient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class DetailsActivity extends BaseMVVMActivity<NewsDetailsViewModel, Detailsactivity> {
-
+    RecyclerView rv;
     private String newscode;
     private TextView actDetailHeadTitle;
     private ScrollView actDetailScrollView;
@@ -46,13 +51,18 @@ public class DetailsActivity extends BaseMVVMActivity<NewsDetailsViewModel, Deta
 
     @Override
     protected void initEvent() {
-        initData();
+
+    }
+
+    private void initNet() {
+
     }
 
     @Override
     protected void loadData() {
         initView();
         requestData();
+
     }
 
     @Override
@@ -66,6 +76,10 @@ public class DetailsActivity extends BaseMVVMActivity<NewsDetailsViewModel, Deta
     }
 
     private void requestData() {
+        int parentid;
+        int userid;
+        parentid=-1;
+        userid=-1;
         mViewModel.baseRespEntryLiveData(newscode).observe(this, new Observer<BaseRespEntry<NewsDetailEntity>>() {
             @Override
             public void onChanged(BaseRespEntry<NewsDetailEntity> arrayListBaseRespEntry) {
@@ -77,6 +91,15 @@ public class DetailsActivity extends BaseMVVMActivity<NewsDetailsViewModel, Deta
                 mBinding.timexiang.setText(data.getPublishtime());
             }
         });
+        mViewModel.comment(newscode,parentid,userid).observe(this, new Observer<BaseRespEntry<ArrayList<MessageEntity>>>() {
+            @Override
+            public void onChanged(BaseRespEntry<ArrayList<MessageEntity>> arrayListBaseRespEntry) {
+                CommentAdapter commentAdapter = new CommentAdapter((List<MessageEntity>) arrayListBaseRespEntry.getData());
+                rv.setAdapter(commentAdapter);
+                rv.setLayoutManager(new LinearLayoutManager(DetailsActivity.this));
+            }
+        });
+
 
     }
 
@@ -110,6 +133,7 @@ public class DetailsActivity extends BaseMVVMActivity<NewsDetailsViewModel, Deta
 
     private void initView() {
         newscode = getIntent().getStringExtra("newscode");
+        rv= findViewById(R.id.rv_comment);
     }
 
 }

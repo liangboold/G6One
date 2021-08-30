@@ -5,6 +5,7 @@ package com.example.g6one;
 import androidx.lifecycle.LiveData;
 
 import com.bw.net.protocol.BaseRespEntry;
+import com.example.g6one.bean.MessageEntity;
 import com.example.g6one.bean.NewsDetailEntity;
 import com.example.g6one.bean.NewsEntity;
 import com.example.g6one.bean.TypeBean;
@@ -31,5 +32,8 @@ public interface Api {
 
     @GET("api/NewsDetail/getNewsDetail")
     LiveData<BaseRespEntry<NewsDetailEntity>> getNewsDetail(@Query("newscode")String newscode);
+
+    @GET("api/Comment/getComment?")
+    LiveData<BaseRespEntry<ArrayList<MessageEntity>>> getCommtexs(@Query("newscode") String newscode, @Query("parentid") int parentid, @Query("userid") int userid);
 
 }
