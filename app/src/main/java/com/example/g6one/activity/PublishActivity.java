@@ -1,6 +1,7 @@
 package com.example.g6one.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageView;
