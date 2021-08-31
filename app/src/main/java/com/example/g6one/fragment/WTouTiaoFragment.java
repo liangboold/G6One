@@ -1,5 +1,6 @@
 package com.example.g6one.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import com.bw.net.protocol.BaseRespEntry;
 import com.example.g6one.BR;
 import com.example.g6one.R;
+import com.example.g6one.activity.PublishActivity;
 import com.example.g6one.adapter.WeitouAdarpter;
 import com.example.g6one.bean.WeitouEntity;
 import com.example.g6one.databinding.FragmentWTouTiaoBinding;
@@ -40,6 +42,13 @@ public class WTouTiaoFragment extends BaseMVVMFragment<WeiViewModel, FragmentWTo
                 mBinding.dongRv.setAdapter(weitouAdarpter);
             }
         });
+
+        mBinding.Publish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), PublishActivity.class));
+            }
+        });
     }
 
     private void initview() {
@@ -53,7 +62,7 @@ public class WTouTiaoFragment extends BaseMVVMFragment<WeiViewModel, FragmentWTo
 
     @Override
     protected void prepareSetVars(HashMap<Integer, Object> mMap) {
-        mMap.put(BR.wei,mViewModel);
+        mMap.put(BR.wei,this);
     }
 
     @Override

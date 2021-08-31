@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.g6one">
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -28,14 +29,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.G6One">
-        <activity android:name=".activity.DetailsActivity"></activity>
+        <activity android:name=".activity.PublishActivity"></activity>
+        <activity android:name=".activity.DetailsActivity" />
         <activity android:name=".activity.MainActivityQuerys" />
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.RegActivity">
-
-        </activity>
+        <activity android:name=".activity.RegActivity"></activity>
         <activity android:name=".activity.HomeActivity" />
-        <activity android:name=".activity.TypeActivity" >
+        <activity android:name=".activity.TypeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -59,20 +59,22 @@
             android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/paths" />
-        </provider>
+
+<!--        <provider             图片选择框架冲突-->
+<!--            android:name="androidx.core.content.FileProvider"-->
+<!--            android:authorities="${applicationId}.fileprovider"-->
+<!--            android:exported="false"-->
+<!--            android:grantUriPermissions="true">-->
+<!--            <meta-data-->
+<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
+<!--                android:resource="@xml/paths" />-->
+<!--        </provider>-->
+
         <service
             android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
             android:label="dexopt"
-            android:process=":dexopt" >
-        </service>
+            android:process=":dexopt"></service>
+
         <service
             android:name="com.taobao.accs.ChannelService"
             android:exported="true"
